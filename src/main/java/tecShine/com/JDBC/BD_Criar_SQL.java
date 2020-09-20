@@ -48,7 +48,6 @@ public  String criarBaseDeDados( String nomeDaBD){
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
 				System.out.println("Todas conexoes Fechadas");
 
 			} catch (SQLException e) {
