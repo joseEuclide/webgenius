@@ -159,7 +159,7 @@ public class TechShineController {
 
 		boolean podeEntrar = false;
 
-		ArrayList<String> retorno = aceder.existeNaWG(senha2, usuario);
+		
 
 		
 		if((usuario.equalsIgnoreCase("1996"))&&
@@ -179,6 +179,8 @@ public class TechShineController {
 			
 			podeEntrar = true;
 		}else {
+			
+			ArrayList<String> retorno = aceder.existeNaWG(senha2, usuario);
 			
 			if (retorno.size() == 0) {
 
@@ -439,9 +441,8 @@ public class TechShineController {
 
 				estado = 1;
 
-				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String("wg", "pca", "usuario", "bi", this.bi, 0);
 
-				model.addAttribute("pca", configurarNome);
+				model.addAttribute("pca", "Euclides");
 				model.addAttribute("escola", "WebGenius");
 
 			}
