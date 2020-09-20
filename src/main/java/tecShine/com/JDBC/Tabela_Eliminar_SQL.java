@@ -65,7 +65,7 @@ public class Tabela_Eliminar_SQL {
 					try {
 						con.close();
 						stm.close();
-						cf.fecharConexao();
+						 
 
 						System.out.println("Coneccões Fechadas !!!");
 
@@ -128,7 +128,7 @@ public class Tabela_Eliminar_SQL {
 					try {
 						con.close();
 						stm.close();
-						cf.fecharConexao();
+						 
 						cf=null;
 
 						System.out.println("Coneccões Fechadas !!!");
@@ -166,7 +166,7 @@ public class Tabela_Eliminar_SQL {
 					try {
 						con.close();
 						stm.close();
-						cf.fecharConexao();
+						 
 						cf=null;
 
 						System.out.println("Coneccões Fechadas !!!");

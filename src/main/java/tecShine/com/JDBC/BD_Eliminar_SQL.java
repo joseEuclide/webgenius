@@ -34,7 +34,7 @@ public class BD_Eliminar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 				cf=null;
 
 				System.out.println("Coneccões Fechadas !!!");

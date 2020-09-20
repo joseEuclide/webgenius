@@ -78,7 +78,7 @@ public  int recuperarCodigo(String BD,String tabela,String coluna){
 				con.close();
 				stm.close();
 				rs.close();
-				cf.fecharConexao();
+				 
 				
 				System.out.println("Coneccões Fechadas !!!");
 

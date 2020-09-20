@@ -95,7 +95,7 @@ public class Pesquisar_SQL {
 				con.close();
 				stm.close();
 				rs.close();
-				cf.fecharConexao();
+				 
 				
 				System.out.println("Coneccões Fechadas !!!");
 
@@ -174,7 +174,7 @@ public class Pesquisar_SQL {
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -245,7 +245,7 @@ public class Pesquisar_SQL {
 				con.close();
 				stm.close();
 				rs.close();
-				cf.fecharConexao();
+				 
 				
 				System.out.println("Coneccões Fechadas !!!");
 
@@ -317,7 +317,7 @@ public Fase2 pesquisarTodosAdmin(String BD,String bi,String usuario){
 				con.close();
 				stm.close();
 				rs.close();
-				cf.fecharConexao();
+				 
 				
 				System.out.println("Coneccões Fechadas !!!");
 
@@ -377,7 +377,7 @@ public ArrayList<String> pesquisarColunaVazia(String BD,String coluna){
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -444,7 +444,7 @@ public ArrayList<String>pesquisarTudoEmString(String BD,String tabela,
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -506,7 +506,7 @@ public ArrayList<String>pesquisarTudoEmString2(String BD,String tabela,
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -593,7 +593,7 @@ public ArrayList<Funcionario>pesquisar_Dados_Pessoais_Funcionários(String BD,St
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -689,7 +689,7 @@ public ArrayList<AcessoInteligente>pesquisar_Dados_Pessoais_DeIntefrantes(String
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -782,7 +782,7 @@ public AcessoInteligente pesquisar_Dados_Pessoais_Dum_Intefrante(String BD,Strin
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -877,7 +877,7 @@ public Aluno pesquisar_Dados_Pessoais_Dum_Aluno(String BD,String tabela
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -937,7 +937,7 @@ public ArrayList<Integer> pesquisarTudoEmInt(String BD,String tabela,String colu
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1006,7 +1006,7 @@ public ArrayList<Integer> pesquisarTudoEmInt_Restrito(String BD,String tabela,St
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1076,7 +1076,7 @@ public ArrayList<String> pesquisarTudoEmString_Restrito(String BD,String tabela,
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1150,7 +1150,7 @@ public int pesquisarQConteudos_Na_coluna(String BD,String tabela,String coluna,
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1213,7 +1213,7 @@ public ArrayList<String> pesquisar_Turmas_Do_Turno(String BD,String coluna_turno
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1280,7 +1280,7 @@ public ArrayList<String> pesquisar_Turmas_Do_Curso(String BD,String coluna_turno
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1352,7 +1352,7 @@ public ArrayList<Tesouraria_Diario> pesquisar_Precos_Das_Propinas(String BD
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1431,7 +1431,7 @@ public ArrayList<Tesouraria_Diario> pesquisar_Precos_Dos_Documentos(String BD
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1504,7 +1504,7 @@ public ArrayList<Tesouraria_Diario> pesquisar_Precos_Dos_Materias(String BD
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1577,7 +1577,7 @@ public ArrayList<Tesouraria_Diario> pesquisar_Precos_Daas_Matriculass(String BD
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1649,7 +1649,7 @@ public ArrayList<Tesouraria_Diario> pesquisar_Precos_Daas_Faltass(String BD
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1714,7 +1714,7 @@ public int pesquisar_Preco_Do_Estagio(String BD
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1779,7 +1779,7 @@ public int pesquisar_Preco_Do_Recurso(String BD
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1851,7 +1851,7 @@ public ArrayList<Tesouraria_Diario> pesquisar_Salario_Funcs(String BD
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1922,7 +1922,7 @@ public String pesquisarUmConteudo_Numa_Linha_String(String BD,String tabela,
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -1994,7 +1994,7 @@ public int pesquisarUmConteudo_Numa_Linha_Int(String BD,String tabela,
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -2752,7 +2752,7 @@ public int pesquisarUmConteudo_Numa_Linha_Int(String BD,String tabela,
 				con.close();
 				stm.close();
 				rs.close();
-				cf.fecharConexao();
+				 
 				
 				System.out.println("Coneccões Fechadas !!!");
 
@@ -2828,7 +2828,7 @@ public ArrayList<Escola> Listar_Escolas_Na_WG(
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 
@@ -2897,7 +2897,7 @@ public ArrayList<Curso> Listar_Cursos(
 			con.close();
 			stm.close();
 			rs.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Coneccões Fechadas !!!");
 

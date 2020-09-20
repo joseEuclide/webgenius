@@ -204,7 +204,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -325,7 +325,7 @@ public class Salvar_SQL {
 				try {
 					con.close();
 					stm.close();
-					cf.fecharConexao();
+					 
 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -701,7 +701,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -756,7 +756,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -810,7 +810,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -876,7 +876,7 @@ public class Salvar_SQL {
 				try {
 					con.close();
 					stm.close();
-					cf.fecharConexao();
+					 
 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -941,7 +941,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1005,7 +1005,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1074,7 +1074,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1143,7 +1143,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1278,7 +1278,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1363,7 +1363,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1435,7 +1435,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1508,7 +1508,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1566,7 +1566,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1665,7 +1665,7 @@ public class Salvar_SQL {
     				try {
     					con.close();
     					stm.close();
-    					cf.fecharConexao();
+    					 
 
     				} catch (SQLException e) {
     					// TODO Auto-generated catch block
@@ -1719,7 +1719,7 @@ public class Salvar_SQL {
     				try {
     					con.close();
     					stm.close();
-    					cf.fecharConexao();
+    					 
 
     				} catch (SQLException e) {
     					// TODO Auto-generated catch block
@@ -1782,7 +1782,7 @@ public class Salvar_SQL {
     				try {
     					con.close();
     					stm.close();
-    					cf.fecharConexao();
+    					 
 
     				} catch (SQLException e) {
     					// TODO Auto-generated catch block
@@ -1851,7 +1851,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1925,7 +1925,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1987,7 +1987,7 @@ public class Salvar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 				
 				System.out.println("Coneccoes fechadas");
 
@@ -2100,7 +2100,7 @@ public  boolean inserirCurso(String BD,Curso curso){
 					try {
 						con.close();
 						stm.close();
-						cf.fecharConexao();
+						 
 						
 						tbc=null;
 						
@@ -2218,7 +2218,7 @@ public void inserirInfoEscola(String BD,
 			 try {
 				 con.close();
 				 stm.close();
-				 cf.fecharConexao();
+				  
 
 				 System.out.println("Coneccoes fechadas");
 
@@ -2321,7 +2321,7 @@ public boolean inserir_NaTabela_InfoEscola2_DatasProvas(String BD,
 				 try {
 					 con.close();
 					 stm.close();
-					 cf.fecharConexao();
+					  
 
 					 System.out.println("Coneccoes fechadas");
 
@@ -2391,7 +2391,7 @@ public boolean inserir_NaTabela_InfoEscola2_DatasProvas(String BD,
 			 try {
 				 con.close();
 				 stm.close();
-				 cf.fecharConexao();
+				  
 
 				 System.out.println("Coneccoes fechadas");
 
@@ -2486,7 +2486,7 @@ public void inserirNiveis_Ou_Estagio(String BD
 					 try {
 						 con.close();
 						 stm.close();
-						 cf.fecharConexao();
+						  
 
 						 System.out.println("Coneccoes fechadas");
 
@@ -2546,7 +2546,7 @@ public void inserirNiveis_Ou_Estagio(String BD
 					 try {
 						 con.close();
 						 stm.close();
-						 cf.fecharConexao();
+						  
 
 						 System.out.println("Coneccoes fechadas");
 
@@ -2602,7 +2602,7 @@ public void inserir_Ensino(String BD
 					 try {
 						 con.close();
 						 stm.close();
-						 cf.fecharConexao();
+						  
 
 						 System.out.println("Coneccoes fechadas");
 
@@ -3040,7 +3040,7 @@ public void inserir_Ensino(String BD
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

@@ -65,7 +65,7 @@ public  void criarTabelaEscolas_WG (){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 			
 			System.out.println("Conexões Fechadas !!!");
 
@@ -116,7 +116,7 @@ public  void criarTabelaAdmin (String BD,String nomeDaTabela){
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -165,7 +165,6 @@ public  void criarTabelaPCA_WG (String BD,String nomeDaTabela){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -209,7 +208,7 @@ public  void criarTabelaAdminFinanca (String BD){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -262,7 +261,7 @@ public void criarTabelaFuncFinanca (String BD,String cargo){
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -317,7 +316,7 @@ public void criarTabela_Cursos(String BD){
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -384,7 +383,7 @@ public void criarTabelaDinamica(String BD,String tabela, ArrayList<String>cursos
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -451,7 +450,7 @@ public void criarTabelaDinamica_Avaliiacao_EProva(String BD,String tabela, Array
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -528,7 +527,7 @@ public void criarTabelaDinamica_Turma_Media(String BD,String tabela, ArrayList<S
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -592,7 +591,7 @@ public void criarTabela_Classes_Disciplinas(String BD, ArrayList<String> classes
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -642,7 +641,7 @@ public void criarTabela_InfoEscola(String BD){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -688,7 +687,7 @@ public void criarTabela_InfoEscola2_DatasProvas(String BD){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -888,7 +887,7 @@ public void criarTabelaTurma(String BD, Turma turma,String escola){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -945,7 +944,7 @@ private  void criar_Turma_Dados_Pessoais(String BD,String nomeTurma){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1000,7 +999,7 @@ private  void criar_Func_Dados_Pessoais(String BD,String cargo){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1054,7 +1053,7 @@ private  void criar_Turma_Acesso(String BD,String nomeTurma){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1106,7 +1105,7 @@ private  void criar_Func_Acesso(String BD,String cargo){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1155,7 +1154,7 @@ public  void criar_Tabela_Estagio(String BD){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1205,7 +1204,7 @@ public  void criar_Tabela_Agendas(String BD){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1258,7 +1257,7 @@ public  void criar_Tabela_materias_Online(String BD){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1311,7 +1310,7 @@ private  void criar_Turma_Financa(String BD,String nomeTurma){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1359,7 +1358,7 @@ public void criarTabelaFase2(String BD){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1408,7 +1407,7 @@ public void criarTabelaFinancaMatEDoc(String BD){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1471,7 +1470,7 @@ private void controleTurmas_InserirLinhaVazia(String BD,String tabela
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1523,7 +1522,7 @@ public void criarTabela_DisciplinasDos_Professores(String BD){
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1578,7 +1577,7 @@ public void criarTabela_Escola_Financa(String BD) {
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1637,7 +1636,7 @@ public void criarTabela_Tesoureiro_diario(String BD) {
 		try {
 			con.close();
 			stm.close();
-			cf.fecharConexao();
+			 
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

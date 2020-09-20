@@ -47,7 +47,7 @@ public class EliminarLinha_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 				cf=null;
 
 				System.out.println("Coneccões Fechadas !!!");
@@ -105,7 +105,7 @@ public class EliminarLinha_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 				cf=null;
 
 				System.out.println("Coneccões Fechadas !!!");

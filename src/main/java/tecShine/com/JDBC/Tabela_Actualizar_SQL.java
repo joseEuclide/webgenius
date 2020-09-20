@@ -66,7 +66,7 @@ public class Tabela_Actualizar_SQL {
 							con.close();
 							stm.close();
 							rs.close();
-							cf.fecharConexao();
+							 
 							
 							System.out.println("Coneccões Fechadas !!!");
 
@@ -112,7 +112,7 @@ public class Tabela_Actualizar_SQL {
 				try {
 					con.close();
 					stm.close();
-					cf.fecharConexao();
+					 
 					
 					System.out.println("Coneccões Fechadas !!!");
 
@@ -176,7 +176,7 @@ public class Tabela_Actualizar_SQL {
 							try {
 								con.close();
 								stm.close();
-								cf.fecharConexao();
+								 
 								System.out.println("Conexão Principal Fechada !!!");
 
 							} catch (SQLException e) {
@@ -254,7 +254,7 @@ public class Tabela_Actualizar_SQL {
 						 try {
 							 con.close();
 							 stm.close();
-							 cf.fecharConexao();
+							  
 
 							 System.out.println("Coneccoes fechadas");
 
@@ -323,7 +323,7 @@ public class Tabela_Actualizar_SQL {
 					try {
 						con.close();
 						stm.close();
-						cf.fecharConexao();
+						 
 						System.out.println("Conexão Principal Fechada !!!");
 
 					} catch (SQLException e) {
@@ -366,7 +366,7 @@ public class Tabela_Actualizar_SQL {
 					try {
 						con.close();
 						stm.close();
-						cf.fecharConexao();
+						 
 						System.out.println("Conexão Principal Fechada !!!");
 
 					} catch (SQLException e) {
@@ -409,7 +409,7 @@ public class Tabela_Actualizar_SQL {
 				try {
 					con.close();
 					stm.close();
-					cf.fecharConexao();
+					 
 					System.out.println("Conexão Principal Fechada !!!");
 
 				} catch (SQLException e) {
@@ -452,7 +452,7 @@ public class Tabela_Actualizar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 				System.out.println("Conexão Principal Fechada !!!");
 
 			} catch (SQLException e) {
@@ -502,7 +502,7 @@ public class Tabela_Actualizar_SQL {
 							try {
 								con.close();
 								stm.close();
-								cf.fecharConexao();
+								 
 								System.out.println("Conexão Principal Fechada !!!");
 
 							} catch (SQLException e) {
@@ -561,7 +561,7 @@ public class Tabela_Actualizar_SQL {
 						 try {
 							 con.close();
 							 stm.close();
-							 cf.fecharConexao();
+							  
 
 							 System.out.println("Coneccoes fechadas");
 
@@ -620,7 +620,7 @@ public class Tabela_Actualizar_SQL {
 							try {
 								con.close();
 								stm.close();
-								cf.fecharConexao();
+								 
 								System.out.println("Conexão Principal Fechada !!!");
 
 							} catch (SQLException e) {
@@ -673,7 +673,7 @@ public class Tabela_Actualizar_SQL {
 						 try {
 							 con.close();
 							 stm.close();
-							 cf.fecharConexao();
+							  
 
 							 System.out.println("Coneccoes fechadas");
 
@@ -754,7 +754,7 @@ public class Tabela_Actualizar_SQL {
 								try {
 									con.close();
 									stm.close();
-									cf.fecharConexao();
+									 
 									System.out.println("Conexão Principal Fechada !!!");
 
 								} catch (SQLException e) {
@@ -828,7 +828,7 @@ public class Tabela_Actualizar_SQL {
 							 try {
 								 con.close();
 								 stm.close();
-								 cf.fecharConexao();
+								  
 
 								 System.out.println("Coneccoes fechadas");
 
@@ -905,7 +905,7 @@ public class Tabela_Actualizar_SQL {
 							try {
 								con.close();
 								stm.close();
-								cf.fecharConexao();
+								 
 								System.out.println("Conexão Principal Fechada !!!");
 
 							} catch (SQLException e) {
@@ -975,7 +975,7 @@ public class Tabela_Actualizar_SQL {
 						 try {
 							 con.close();
 							 stm.close();
-							 cf.fecharConexao();
+							  
 
 							 System.out.println("Coneccoes fechadas");
 
@@ -1026,7 +1026,7 @@ public class Tabela_Actualizar_SQL {
 							try {
 								con.close();
 								stm.close();
-								cf.fecharConexao();
+								 
 								System.out.println("Conexão Principal Fechada !!!");
 
 							} catch (SQLException e) {
@@ -1096,7 +1096,7 @@ public class Tabela_Actualizar_SQL {
 						 try {
 							 con.close();
 							 stm.close();
-							 cf.fecharConexao();
+							  
 
 							 System.out.println("Coneccoes fechadas");
 
@@ -1147,7 +1147,7 @@ public class Tabela_Actualizar_SQL {
 							try {
 								con.close();
 								stm.close();
-								cf.fecharConexao();
+								 
 								System.out.println("Conexão Principal Fechada !!!");
 
 							} catch (SQLException e) {
@@ -1217,7 +1217,7 @@ public class Tabela_Actualizar_SQL {
 						 try {
 							 con.close();
 							 stm.close();
-							 cf.fecharConexao();
+							  
 
 							 System.out.println("Coneccoes fechadas");
 
@@ -1271,7 +1271,7 @@ public class Tabela_Actualizar_SQL {
 							try {
 								con.close();
 								stm.close();
-								cf.fecharConexao();
+								 
 								System.out.println("Conexão Principal Fechada !!!");
 
 							} catch (SQLException e) {
@@ -1341,7 +1341,7 @@ public class Tabela_Actualizar_SQL {
 						 try {
 							 con.close();
 							 stm.close();
-							 cf.fecharConexao();
+							  
 
 							 System.out.println("Coneccoes fechadas");
 
@@ -1392,7 +1392,7 @@ public class Tabela_Actualizar_SQL {
 							try {
 								con.close();
 								stm.close();
-								cf.fecharConexao();
+								 
 								System.out.println("Conexão Principal Fechada !!!");
 
 							} catch (SQLException e) {
@@ -1463,7 +1463,7 @@ public class Tabela_Actualizar_SQL {
 						 try {
 							 con.close();
 							 stm.close();
-							 cf.fecharConexao();
+							  
 
 							 System.out.println("Coneccoes fechadas");
 
@@ -1507,7 +1507,7 @@ public class Tabela_Actualizar_SQL {
 							try {
 								con.close();
 								stm.close();
-								cf.fecharConexao();
+								 
 								System.out.println("Conexão Principal Fechada !!!");
 
 							} catch (SQLException e) {
@@ -1549,7 +1549,7 @@ public class Tabela_Actualizar_SQL {
 								try {
 									con.close();
 									stm.close();
-									cf.fecharConexao();
+									 
 									System.out.println("Conexão Principal Fechada !!!");
 
 								} catch (SQLException e) {
@@ -1591,7 +1591,7 @@ public class Tabela_Actualizar_SQL {
 									try {
 										con.close();
 										stm.close();
-										cf.fecharConexao();
+										 
 										System.out.println("Conexão Principal Fechada !!!");
 
 									} catch (SQLException e) {
@@ -1636,7 +1636,7 @@ public class Tabela_Actualizar_SQL {
 										try {
 											con.close();
 											stm.close();
-											cf.fecharConexao();
+											 
 											System.out.println("Conexão Principal Fechada !!!");
 
 										} catch (SQLException e) {
@@ -1680,7 +1680,7 @@ public class Tabela_Actualizar_SQL {
 											try {
 												con.close();
 												stm.close();
-												cf.fecharConexao();
+												 
 												System.out.println("Conexão Principal Fechada !!!");
 
 											} catch (SQLException e) {
@@ -1724,7 +1724,7 @@ public class Tabela_Actualizar_SQL {
 												try {
 													con.close();
 													stm.close();
-													cf.fecharConexao();
+													 
 													System.out.println("Conexão Principal Fechada !!!");
 
 												} catch (SQLException e) {
@@ -1770,7 +1770,7 @@ public class Tabela_Actualizar_SQL {
 													try {
 														con.close();
 														stm.close();
-														cf.fecharConexao();
+														 
 														System.out.println("Conexão Principal Fechada !!!");
 
 													} catch (SQLException e) {
@@ -1814,7 +1814,7 @@ public class Tabela_Actualizar_SQL {
 														try {
 															con.close();
 															stm.close();
-															cf.fecharConexao();
+															 
 															System.out.println("Conexão Principal Fechada !!!");
 
 														} catch (SQLException e) {
@@ -1858,7 +1858,7 @@ public class Tabela_Actualizar_SQL {
 															try {
 																con.close();
 																stm.close();
-																cf.fecharConexao();
+																 
 																System.out.println("Conexão Principal Fechada !!!");
 
 															} catch (SQLException e) {
@@ -1902,7 +1902,7 @@ public class Tabela_Actualizar_SQL {
 																try {
 																	con.close();
 																	stm.close();
-																	cf.fecharConexao();
+																	 
 																	System.out.println("Conexão Principal Fechada !!!");
 
 																} catch (SQLException e) {
@@ -1976,7 +1976,7 @@ public class Tabela_Actualizar_SQL {
 								try {
 									con.close();
 									stm.close();
-									cf.fecharConexao();
+									 
 									System.out.println("Conexão Principal Fechada !!!");
                                    
                                     p=null;
@@ -2050,7 +2050,7 @@ public class Tabela_Actualizar_SQL {
 							 try {
 								 con.close();
 								 stm.close();
-								 cf.fecharConexao();
+								  
 
 								 System.out.println("Coneccoes fechadas");
 
@@ -2099,7 +2099,7 @@ public class Tabela_Actualizar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 				System.out.println("Coneccões Fechadas !!!");
 
@@ -2142,7 +2142,7 @@ public class Tabela_Actualizar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 				System.out.println("Coneccões Fechadas !!!");
 
@@ -2191,7 +2191,7 @@ public class Tabela_Actualizar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 				System.out.println("Coneccões Fechadas !!!");
 
@@ -2240,7 +2240,7 @@ public class Tabela_Actualizar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 				System.out.println("Coneccões Fechadas !!!");
 
@@ -2294,7 +2294,7 @@ public class Tabela_Actualizar_SQL {
 			try {
 				con.close();
 				stm.close();
-				cf.fecharConexao();
+				 
 
 				System.out.println("Coneccões Fechadas !!!");
 
