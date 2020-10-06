@@ -726,11 +726,10 @@
 
 													<select class="custom-select  container" name="cargo" id="duracao"
 														 required="required">
-															<option disabled selected>Selecione uma opção...</option>
-															
+															<option selected="selected"></option>
 															<option th:value="${func}" th:each="func : ${funcionarios}" th:text="${func}">
 															
-															<option></option>
+															
 															
 														</select>
 												</div>
@@ -786,8 +785,8 @@
 
 															<select class="custom-select  container" name="curso" required="required"
 																id="duracao">
-																<option disabled selected>Selecione o Curso.</option>
-																<option></option>
+																<option selected="selected"></option>
+																<option value="nenhum">Nenhum</option>
 
 
 																<option th:value="${cur}" th:each="cur : ${cursos}"
@@ -818,7 +817,9 @@
 
 															<select name="turno" class="custom-select"
 																required="required">
-																<option></option>
+																
+																<option selected="selected"></option>
+																<option value="nenhum">Nenhum</option>
 																<option value="Manha">Manhã</option>
 																<option value="Tarde">Tarde</option>
 																<option value="Noite">Noite</option>
@@ -846,9 +847,8 @@
 
 															<select class="custom-select  container" name="nivel"
 																id="nivel" required="required">
-																<option disabled selected>Selecione uma
-																	opção...</option>
-																	<option></option>
+																<option selected="selected"></option>
+																<option value="nenhum">Nenhum</option>
 
 
 																<option th:value="${nivel}" th:each="nivel : ${niveis}"

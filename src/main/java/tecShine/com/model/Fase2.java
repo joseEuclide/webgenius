@@ -1,6 +1,9 @@
 package tecShine.com.model;
 
 import java.io.File;
+import java.sql.Blob;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import tecShine.com.model.WG.Escola;
 
@@ -14,12 +17,15 @@ public class Fase2 {
 	
 	
 	private boolean estagio;
-	private File logotipo;
+	private MultipartFile logotipo;
+	
 	public Escola escola= new Escola();
 	
 	private String usuarioAcesso;
 	private String acessoPersonalizado1;
 	private String acessoPersonalizado2;
+	
+	 
 	
 	
 	
@@ -68,10 +74,11 @@ public class Fase2 {
 	public void setEstagio(boolean estagio) {
 		this.estagio = estagio;
 	}
-	public File getLogotipo() {
+	
+	public MultipartFile getLogotipo() {
 		return logotipo;
 	}
-	public void setLogotipo(File logotipo) {
+	public void setLogotipo(MultipartFile logotipo) {
 		this.logotipo = logotipo;
 	}
 	public String getBi() {

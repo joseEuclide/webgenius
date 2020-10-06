@@ -162,6 +162,10 @@
           font-weight: bolder;
           color: black;
         }
+        .tt{
+           
+            box-shadow: 1px 1px 4px black;
+        }
    </style> 
 
 </head>
@@ -453,7 +457,7 @@
 										</div><br>
 										<hr>
 
-										<form action="/Tesouraria-pagar" method="post" class="container mb-4">
+										<form action="/Tesouraria-pagar" method="post" class="container mb-4 tt">
 
 											<div class="container">
 
@@ -473,7 +477,7 @@
 
 														<div class="form-group">
 
-                                                             Meses
+                                                             Quantos Meses Vai Pagar
 														</div>
 
 
@@ -488,8 +492,7 @@
 																
 																<select class="custom-select  container" name="mesesAPagar"
 																id="duracao" required="required">
-																<option disabled selected>Quantos Meses Vai Pagar.</option>
-																<option></option>
+																<option selected></option>
 
 
 																<option th:value="${m}" th:each="m : ${precos}"
@@ -542,7 +545,7 @@
 											<div class="cobtainer">
 											  <p><em class="lead red-text">Vai Pagar com Multas Se: </em></p><br>
 											  <p class="lead">* Se Tem Dívidas Nos Meses anteriores a <span th:text="${mesActual}"></span></p>
-											  <p class="lead">* Se  Hoje for Dia  <span th:text="${diaActual}"></span></p>
+											  <p class="lead">* Se  já passou do dia <span th:text="${diaActual}"></span> de <span th:text="${mesActual}"></span></p>
 											</div>
 											
 											

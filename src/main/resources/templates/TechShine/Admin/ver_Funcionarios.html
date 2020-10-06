@@ -1,6 +1,9 @@
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"
+                xmlns:th="https://thymeleaf.org"
+		        xmlns:layout:="https://www.ultraq.net.nz/thymeleaf/layout"
+		        >
 
 <head>
 <meta charset="utf-8">
@@ -50,7 +53,7 @@
 }
 
 .porImagem {
-	background-image: url("webgenius/Admin/imgs/slider-02.jpg");
+	background-image: url("webgenius/Admin/imgs/111.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	height: 400px;
@@ -77,7 +80,7 @@
 				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
 					href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a
-					href="index3.html" class="nav-link">Vassovava</a></li>
+					href="index3.html" class="nav-link" th:text="${escola}"></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a href="#"
 					class="nav-link">Activo</a></li>
 			</ul>
@@ -123,7 +126,7 @@
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="#" class="d-block">Euclair Thompson</a>
+						<a href="#" class="d-block" th:text="${nome}"></a>
 					</div>
 				</div>
 
@@ -305,12 +308,12 @@
 					<!-- Small boxes (Stat box) -->
 
 
-					<div class="row mb-3">
+					<div class="row mb-2">
 						<div class="col-lg-3 col-6">
 							<!-- small box -->
 							<div class="small-box bg-info">
 								<div class="inner">
-									<h3>150</h3>
+									<h3 th:text="${qalunos}"></h3>
 
 									<p>Alunos</p>
 								</div>
@@ -327,7 +330,7 @@
 							<div class="small-box bg-success">
 								<div class="inner">
 									<h3>
-										53<sup style="font-size: 20px">%</sup>
+										<span th:text="${qfunc}"></span><sup style="font-size: 20px">Funcs</sup>
 									</h3>
 
 									<p>Funcionários</p>
@@ -335,7 +338,7 @@
 								<div class="icon">
 									<i class="ion ion-stats-bars"></i>
 								</div>
-								<a href="#" class="small-box-footer">Ver<i
+								<a href="/Admin-Ver-Funcionarios" class="small-box-footer">Ver<i
 									class="fas fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
@@ -344,7 +347,7 @@
 							<!-- small box -->
 							<div class="small-box bg-warning">
 								<div class="inner">
-									<h3>44</h3>
+									<h3 th:text="${qCurso}"></h3>
 
 									<p>Cursos</p>
 								</div>
@@ -360,7 +363,7 @@
 							<!-- small box -->
 							<div class="small-box bg-danger">
 								<div class="inner">
-									<h3>65</h3>
+									<h3 th:text="${renda}"></h3>
 
 									<p>Finança</p>
 								</div>

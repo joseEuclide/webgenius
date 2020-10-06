@@ -62,11 +62,10 @@ public class Salvar_SQL {
 		Pesquisar_SQL p = new Pesquisar_SQL();
 		
 		
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		 multipartResolver.setMaxUploadSize(100000);
 		
+		  
 		String nomeDaEscola=admin.getInstituicao();
-		String BD= ta.tirarCaracteres(nomeDaEscola);
+		String BD= ta.tirarCaracteres2(nomeDaEscola);
 		
 		String bi=admin.getBi();
 		
@@ -127,6 +126,7 @@ public class Salvar_SQL {
 	  //Criando Tabela infoescola
 	    c.criarTabelaFase2(BD);
 	    c.criar_Tabela_materias_Online(BD);
+	    c.criarTabela_CursosPorNiveis(BD);
 	    
 	    //Criando a Tabela Disciplinas_Dos_Profs, Onde 
 	    //Contem varias informações importantes, como:
@@ -174,7 +174,9 @@ public class Salvar_SQL {
 			stm.executeUpdate(usarBD);
 			
 			
-		
+		     
+		     
+		     
 					
 			
 			stm.setString(1, admin.getPca());
@@ -186,7 +188,8 @@ public class Salvar_SQL {
 			stm.setString(7, bi);
 			stm.setString(8, "");
 			stm.setString(9, nomeDaEscola);
-			stm.setString(10, "");
+			
+			stm.setBlob(10, admin.getLogotipo().getInputStream(), admin.getLogotipo().getSize());
 			
 			
 			
@@ -767,6 +770,63 @@ public class Salvar_SQL {
 	}
        
        
+       public void inserir_No_Cursos_Niveis(String BD,String curso,int CursoDecima,
+    		   int cursoDecPrimeira,int cursoDecSegunda,int cursoDecTerceira
+    		   ){
+    	
+    	   
+    	 
+	
+		
+		String sql="insert into cursos_Niveis values(?,?,?,?,?,?)";
+		
+		
+		String usarBD="use "+BD;
+		
+		
+		 Connection con=null;
+		 PreparedStatement stm=null ;
+		
+		try{
+			con = ConnectionFactory.getConnection();
+			stm = con.prepareStatement(sql);
+			stm.executeUpdate(usarBD);
+			int codigo=0;
+			
+			codigo= cID.recuperarCodigo(BD, "cursos_Niveis", "id");
+			stm.setInt(1, codigo);
+			stm.setString(2, curso);
+			stm.setInt(3, CursoDecima);
+			stm.setInt(4, cursoDecPrimeira);
+			stm.setInt(5, cursoDecSegunda);
+			stm.setInt(6, cursoDecTerceira);
+
+
+			stm.executeUpdate();
+			
+		
+			System.out.println(" Dados Inseridos!!!");
+			
+		
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				con.close();
+				stm.close();
+				 
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+       
+       
        public void inserir_Tesoureiro(String BD,String bi
     		   ){
     	
@@ -1303,7 +1363,7 @@ public class Salvar_SQL {
 		
 		String sql;
 		if(e_aluno) {
-			 sql="insert into "+tabela+"_Acesso"+" values(?,?,?,?)";
+			 sql="insert into "+tabela+"_Acesso"+" values(?,?,?,?,?)";
 		}else {
 			 sql="insert into "+tabela+"_Acesso"+" values(?,?,?,?,?)";
 		}
@@ -1334,6 +1394,7 @@ public class Salvar_SQL {
 				stm.setString(2, escola+" "+usuario+" AL");
 				stm.setString(3, bi);
 				stm.setString(4, "");
+				stm.setString(5, "");
 		    }else {
 		    	
 		    	stm.setInt(1, codigo);
@@ -1638,7 +1699,7 @@ public class Salvar_SQL {
     				System.out.println("V1: "+v);
     				System.out.println("codigo2: "+codigo2);
     				
-    				stm.setInt(1, codigo2);
+    				stm.setInt(1, v);
     				stm.setString(2, "");
     				stm.setString(3, aluno);
     				stm.setString(4, bi);
@@ -1687,12 +1748,12 @@ public class Salvar_SQL {
     				stm.executeUpdate(usarBD);
     				
     				
-    				int v= cID.recuperarCodigo(BD, tabela+"_Prova", "id");
+    				int v= cID.recuperarCodigo(BD, tabela+"_Avaliacao", "id");
     				++v;
     				
     				System.out.println("V2: "+v);
     				
-    				stm.setInt(1, codigo2);
+    				stm.setInt(1, v);
     				stm.setString(2, "");
     				stm.setString(3, aluno);
     				stm.setString(4, bi);
@@ -1741,12 +1802,12 @@ public class Salvar_SQL {
     				stm.executeUpdate(usarBD);
     				
     				
-    				int v= cID.recuperarCodigo(BD, tabela+"_Prova", "id");
+    				int v= cID.recuperarCodigo(BD, tabela+"_Media", "id");
     				++v;
     				
     				System.out.println("V3: "+v);
     				
-    				stm.setInt(1, codigo2);
+    				stm.setInt(1, v);
     				stm.setString(2, "");
     				stm.setString(3, aluno);
     				stm.setString(4, bi);
@@ -2044,7 +2105,10 @@ public  boolean inserirCurso(String BD,Curso curso){
 		
 		
 		
-		int precoDoCurso= curso.getPreco();
+		int precoDoCurso1= curso.getPreco1();
+		int precoDoCurso2= curso.getPreco2();
+		int precoDoCurso3= curso.getPreco3();
+		int precoDoCurso4= curso.getPreco4();
 		
 		if(curso_Existe) {
 			
@@ -2078,7 +2142,7 @@ public  boolean inserirCurso(String BD,Curso curso){
 					stm.setInt(1, codigo);
 					stm.setString(2, crs);
 					stm.setInt(3, curso.getCargaHoraria());
-					stm.setInt(4, precoDoCurso);
+					stm.setInt(4, 0);
 					stm.setString(5, "");
 					stm.setString(6, "");
 					stm.setString(7, "");
@@ -2118,8 +2182,9 @@ public  boolean inserirCurso(String BD,Curso curso){
 				inserir_Nome_Do_Curso_ParaConfirmacao(BD, novoCurso);
 				inserir_Nome_Do_Curso_Matricula(BD, novoCurso);
 				
-				inserir_Preco_Do_Curso_Propina(BD, novoCurso, precoDoCurso);
+				inserir_Preco_Do_Curso_Propina(BD, novoCurso, 0);
 				s.inserir_Mat_Doc_QFunc_QAlunos_(BD, "infoescola", "QCurso", null, 0, 0, codigo);
+				inserir_No_Cursos_Niveis(BD, novoCurso, precoDoCurso1, precoDoCurso2, precoDoCurso3, precoDoCurso4);
 				
 				cursosQuant=codigo;
 				if(cursosQuant==1) {
@@ -2885,40 +2950,86 @@ public void inserir_Ensino(String BD
 			Tabela_Actualizar_SQL ta= new Tabela_Actualizar_SQL();
 			Salvar_SQL s = new Salvar_SQL();
 			
+			
+			ArrayList<String> meses = new ArrayList<>();
+			meses.add("Janeiro");
+			meses.add("Fevereiro");
+			meses.add("Marco");
+			meses.add("Abril");
+			meses.add("Maio");
+			meses.add("Junho");
+			meses.add("Julho");
+			meses.add("Agosto");
+			meses.add("Setembro");
+			meses.add("Outubro");
+			meses.add("Novembro");
+			meses.add("Dezembro");
+			
+            int precoDoCurso=0;		
+			
+			if(nivel.contains("10")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "Decima", "cursos", curso, 0);	
+			}else if(nivel.contains("11")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaPrimeira", "cursos", curso, 0);	
+			}else if(nivel.contains("12")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaSegunda", "cursos", curso, 0);	
+			}else if(nivel.contains("13")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaTerceira", "cursos", curso, 0);	
+			}
+			
+            int preco = precoDoCurso; 
+			
 			String mes = s.mesActual(BD);
 			
 			if((nivel.contains("10"))||
 					(nivel.contains("11"))||
 					(nivel.contains("12"))||
 							(nivel.contains("13"))){
-						
-						
 				
-				       
-				       int preco= p.pesquisarUmConteudo_Numa_Linha_Int(BD,
-					       		"cursos", "preco",
-					    		   "nome", curso,0);
-				       
-				       
-				       ta.actualizarColuna_QualquerLinha_Int(BD, tabela+"_Financa", 
-				    		   mes, 
-				    		   preco, "", codigo);
-			
-			           ta=null;
-			           p=null;
+				sair:
+				for(String c : meses) {
+					
+					
+					
+					if(c.equalsIgnoreCase(mes)) {
+						
+						System.out.println("É IGUAL");
+						  ta.actualizarColuna_QualquerLinha_Int(BD, tabela+"_Financa", 
+							mes,preco, "", codigo);
+						
+						
+						break sair;
+					}else { 
+						
+						System.out.println("É DIFERENTE");
+						
+						   ta.actualizarColuna_QualquerLinha_Int(BD, tabela+"_Financa", 
+				    		   c, 
+				    		   1, "", codigo);
+					
+					
+					}
+					
+					
+				}
+				
+				
+				
+				
 			}else {
 				
-				
-				
-				int preco= p.pesquisarUmConteudo_Numa_Linha_Int(BD,
+				preco= p.pesquisarUmConteudo_Numa_Linha_Int(BD,
 			       		"infoescola", "Preco",
 			    		   "niveis", nivel,0);
 				
 				 ta.actualizarColuna_QualquerLinha_Int(BD, tabela+"_Financa", 
 			    		   mes, 
 			    		   preco, "", codigo);
-				
 			}
+			
+			
+			
+			
 				
 				
 				
@@ -3997,11 +4108,14 @@ public void inserir_Ensino(String BD
 						ArrayList<String> todosMeses= new ArrayList<>();
 						int mes=0;
 						
+						
+						
 						for(String m: mesesPagos ) {
 						 mes =  p.pesquisarUmConteudo_Numa_Linha_Int(BD, turma+"_financa", m, "id", "", idAluno);
 						
 						  if(mes==0) {
 							  todosMeses.add(m);
+							  
 						  }
 						}
 					
@@ -4020,11 +4134,22 @@ public void inserir_Ensino(String BD
 			}
 			
 			
-			public ArrayList<String> tesouraria_MsesQueVaiPagar(String BD,String curso){
+			public ArrayList<String> tesouraria_MsesQueVaiPagar(String BD,String curso,String nivel){
 				
 				  
 				Pesquisar_SQL p = new Pesquisar_SQL();
-				int precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos", "preco", "nome", curso, 0);			    
+				int precoDoCurso=0;		
+				
+				if(nivel.contains("10")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "Decima", "cursos", curso, 0);	
+				}else if(nivel.contains("11")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaPrimeira", "cursos", curso, 0);	
+				}else if(nivel.contains("12")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaSegunda", "cursos", curso, 0);	
+				}else if(nivel.contains("13")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaTerceira", "cursos", curso, 0);	
+				}
+				
 			    ArrayList<String> pagamento2= new ArrayList<>();
 			    
 			    
@@ -4049,11 +4174,22 @@ public void inserir_Ensino(String BD
 			}
 			
 			
-			public ArrayList<String> tesouraria_Multas(String BD,String curso){
+			public ArrayList<String> tesouraria_Multas(String BD,String curso,String nivel){
 				
 				  
 				Pesquisar_SQL p = new Pesquisar_SQL();
-				int precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos", "preco", "nome", curso, 0);
+				
+                int precoDoCurso=0;		
+				
+				if(nivel.contains("10")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "Decima", "cursos", curso, 0);	
+				}else if(nivel.contains("11")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaPrimeira", "cursos", curso, 0);	
+				}else if(nivel.contains("12")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaSegunda", "cursos", curso, 0);	
+				}else if(nivel.contains("13")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaTerceira", "cursos", curso, 0);	
+				}
 				int multa= p.pesquisarTudoEmInt(BD, "adminfinanca", "multa").get(0);
 				ArrayList<String> pagamento2= new ArrayList<>();
 			    
@@ -4061,17 +4197,17 @@ public void inserir_Ensino(String BD
 			   
 			    	
 			    	pagamento2.add("1 Mes -"+(multa+precoDoCurso)+",00Kz");
-				    pagamento2.add("2 Meses -"+((multa*2)+precoDoCurso*2)+",00Kz");
-				    pagamento2.add("3 Meses -"+((multa*3)+precoDoCurso*3)+",00Kz");
-				    pagamento2.add("4 Meses -"+((multa*4)+precoDoCurso*4)+",00Kz");
-				    pagamento2.add("5 Meses -"+((multa*5)+precoDoCurso*5)+",00Kz");
-				    pagamento2.add("6 Meses -"+((multa*6)+precoDoCurso*6)+",00Kz");
-				    pagamento2.add("7 Meses -"+((multa*7)+precoDoCurso*7)+",00Kz");
-				    pagamento2.add("8 Meses -"+((multa*8)+precoDoCurso*8)+",00Kz");
-				    pagamento2.add("9 Meses -"+((multa*9)+precoDoCurso*9)+",00Kz");
-				    pagamento2.add("10 Meses -"+((multa*10)+precoDoCurso*10)+",00Kz");
-				    pagamento2.add("11 Meses -"+((multa*11)+precoDoCurso*11)+",00Kz");
-				    pagamento2.add("12 Meses -"+((multa*12)+precoDoCurso*12)+",00Kz");
+				    pagamento2.add("2 Meses -"+((multa*2)+(precoDoCurso*2))+",00Kz");
+				    pagamento2.add("3 Meses -"+((multa*3)+(precoDoCurso*3))+",00Kz");
+				    pagamento2.add("4 Meses -"+((multa*4)+(precoDoCurso*4))+",00Kz");
+				    pagamento2.add("5 Meses -"+((multa*5)+(precoDoCurso*5))+",00Kz");
+				    pagamento2.add("6 Meses -"+((multa*6)+(precoDoCurso*6))+",00Kz");
+				    pagamento2.add("7 Meses -"+((multa*7)+(precoDoCurso*7))+",00Kz");
+				    pagamento2.add("8 Meses -"+((multa*8)+(precoDoCurso*8))+",00Kz");
+				    pagamento2.add("9 Meses -"+((multa*9)+(precoDoCurso*9))+",00Kz");
+				    pagamento2.add("10 Meses -"+((multa*10)+(precoDoCurso*10))+",00Kz");
+				    pagamento2.add("11 Meses -"+((multa*11)+(precoDoCurso*11))+",00Kz");
+				    pagamento2.add("12 Meses -"+((multa*12)+(precoDoCurso*12))+",00Kz");
 			    
 			    
 			    return pagamento2;
@@ -4155,7 +4291,7 @@ public void inserir_Ensino(String BD
 			
 			
 			public Pagamento tesouraria_EfectuarOPagamento(String BD,String turma,int idAluno,
-					String qMesesAPagar,String curso,int idFunc,String bi_func ) {
+					String qMesesAPagar,String curso,int idFunc,String bi_func,String nivel) {
 				
 				
 				Pagamento aluno = new Pagamento();
@@ -4171,7 +4307,21 @@ public void inserir_Ensino(String BD
 				
 				
 				Pesquisar_SQL p = new Pesquisar_SQL();
-				int precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos", "preco", "nome", curso, 0);
+				
+				
+                int precoDoCurso=0;		
+				
+				if(nivel.contains("10")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "Decima", "cursos", curso, 0);	
+				}else if(nivel.contains("11")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaPrimeira", "cursos", curso, 0);	
+				}else if(nivel.contains("12")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaSegunda", "cursos", curso, 0);	
+				}else if(nivel.contains("13")) {
+					precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaTerceira", "cursos", curso, 0);	
+				}
+				
+				  
 				String tesoureiro= p.pesquisarUmConteudo_Numa_Linha_String(BD, "tesouraria_dadospessoais", "nomes", "id", "", idFunc);
 			    int tempoSemMulta= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "Escola_Financa", "TempoPropina", "id", "", 1);
 			    int multa= p.pesquisarTudoEmInt(BD, "adminfinanca", "multa").get(0);

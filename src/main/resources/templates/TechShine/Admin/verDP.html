@@ -416,8 +416,9 @@
                                                                             <tr class="corDaLinha">
                                                                             
                                                                                <th class="th">Nome</th>
-                                                                               <th class="th">Contrato</th>
-                                                                                <th class="th">Telefone</th>
+                                                                               <th class="th">Telefone</th>
+                                                                               <th></th>
+                                                                               <th></th>
                                                                                
                                                                                
                                                                             
@@ -430,8 +431,9 @@
                                                                             
                                                                                <td  th:text="${prof.nome}"></td>
                                                                                <td  th:text="${prof.telefone}"></td>
-                                                                               <td  th:text="${prof.contrato2}"></td>
-                                                                              
+                                                                               <td><a th:href="@{'/Tirar-Acesso-Ao-Sistema/'+ ${prof.bi}}">Bloqueiar</a></td>
+                                                                               <td><a th:href="@{'/Repor-Acesso-Ao-Sistema/'+ ${prof.bi}}">Desbloqueiar</a></td>
+                                                                            
                                                                                
                                                                             
                                                                             </tr>

@@ -2354,6 +2354,15 @@ public String tirarCaracteres2(String palavra) {
 				  
 			}
 			  
+		  }else  if(palavra.contains(" ")) {
+			  
+			  
+			  String[] espacos=palavra.split(" ");
+			  for (String e : espacos) {
+				  actualizar=actualizar+e;
+				  
+			}
+			  
 		  }else {
 			  
 			  actualizar=palavra;

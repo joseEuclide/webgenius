@@ -280,9 +280,7 @@ public class Aluno {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-		AcessoInteligente a = new AcessoInteligente();
-		a.nome=this.nome;
-		a=null;
+		
 	}
 
 	

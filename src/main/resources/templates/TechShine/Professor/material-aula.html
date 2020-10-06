@@ -402,9 +402,7 @@
 
 																	<select class="custom-select  container" name="curso"
 																		id="duracao" required="required">
-																		<option disabled selected>Selecione uma
-																			opção...</option>
-
+																		<option  selected></option>
 
 																		<option th:value="${cur}" th:each="cur : ${cursos}"
 																			th:text="${cur}"></option>
@@ -430,8 +428,7 @@
 
 																	<select class="custom-select  container" name="nivel"
 																		id="duracao" required="required">
-																		<option disabled selected>Selecione uma
-																			opção...</option>
+																		<option  selected></option>
 
 
 																		<option th:value="${cur}" th:each="cur : ${niveis}"
@@ -458,16 +455,48 @@
 
 																	<select class="custom-select  container" name="desciplina"
 																		id="duracao" required="required">
-																		<option disabled selected>Selecione uma
-																			opção...</option>
-
-
+																		
+																		<option  selected></option>
 																		<option th:value="${cur}" th:each="cur : ${desciplinas}"
 																			th:text="${cur}"></option>
 
 																	</select>
 
 																</div>
+															</div>
+															
+															
+															
+															<div class="row">
+															
+															
+															    <div class="col-md-6 col-lg-6 sm-12 ">
+
+																<div class="form-group">
+
+																	<div class="input-group-pretend">
+
+																		<label for="duracao">Turma</label>
+																	</div>
+																</div>
+
+																<div class="form-group">
+
+
+																	<select class="custom-select  container" name="turma"
+																		id="duracao" required="required">
+																		<option  selected></option>
+
+
+																		<option th:value="${t}" th:each="t : ${turmas}"
+																			th:text="${t}"></option>
+
+																	</select>
+
+																</div>
+															</div>
+															
+															
 															</div>
 													    
 													    

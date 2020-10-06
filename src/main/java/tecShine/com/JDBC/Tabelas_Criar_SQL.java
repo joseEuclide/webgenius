@@ -90,8 +90,8 @@ public  void criarTabelaAdmin (String BD,String nomeDaTabela){
 				+ "nome varchar(20),sigla varchar(20),"
 				+ "bi varchar(30),contrato varchar(20),"
 				+ "valor int,usuario varchar(30),acesso1 varchar(30),"
-				+ "acesso2 varchar(30),instituicao varchar(80),"
-				+ "logotipo varchar(225));"
+				+ "acesso2 varchar(30),instituicao varchar(255),"
+				+ "logotipo blob);"
 				;
 		String usarBD="use "+BD;
 		
@@ -355,6 +355,57 @@ public void criarTabelaDinamica(String BD,String tabela, ArrayList<String>cursos
 	
 	String sql="create table "+tabela+"("+
 			colunas+");";
+	
+	System.out.println(sql);
+	
+	
+	 Connection con=null;
+	 PreparedStatement stm=null ;
+	
+	try {
+	        
+		
+		
+		
+		con = ConnectionFactory.getConnection();
+		stm = con.prepareStatement(sql);
+		stm.executeUpdate(usarBD);
+		stm.executeUpdate();
+		
+	
+		System.out.println("Tabela  Criada !!!");
+		
+		
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+	finally {
+		try {
+			con.close();
+			stm.close();
+			 
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+
+
+}
+
+
+public void criarTabela_CursosPorNiveis(String BD){
+	
+
+	String usarBD="use "+BD;
+	
+	String sql="create table cursos_Niveis("
+			+ "id int,cursos varchar(255),"
+			+ "Decima  int, DecimaPrimeira int,"
+			+ "DecimaSegunda int,DecimaTerceira int);";
 	
 	System.out.println(sql);
 	
@@ -706,6 +757,7 @@ public void criarTabelaTurma(String BD, Turma turma,String escola){
 	String turno = turma.getTurno();
 	String informeO_Periodo=turno;
 	String NomeDoCurso= turma.getCurso();
+	String curso= NomeDoCurso;
 	
 	String turno2=(String)turno.subSequence(0, 1);
 	String nivel2=(String)turma.getNivel().subSequence(0, 2);

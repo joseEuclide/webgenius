@@ -14,7 +14,7 @@
 <meta name="keywords" content="sistema, academico, engenharia, software" />
 <meta name="author" content="Guilherme Araujo" />
 <link rel="shortcut icon" type="image/x-icon" href="imgs/favicon.png">
-<title>WebGenius| Fale Connosco</title>
+<title>Admin| WebGenius -  Fale Connosco</title>
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -80,7 +80,7 @@
 				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
 					href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a
-					href="index3.html" class="nav-link">Vassovava</a></li>
+					href="index3.html" class="nav-link" th:text="${escola}"></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a href="#"
 					class="nav-link">Activo</a></li>
 			</ul>
@@ -114,7 +114,7 @@
 			<a href="index3.html" class="brand-link"> <img
 				src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
 				class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">WebGenius</span>
+				<span class="brand-text font-weight-light">Admin</span>
 			</a>
 
 			<!-- Sidebar -->
@@ -126,7 +126,7 @@
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="#" class="d-block" th:text="${pca}"></a>
+						<a href="#" class="d-block" th:text="${nome}"></a>
 					</div>
 				</div>
 
@@ -233,8 +233,7 @@
 						<!-- /.col -->
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">17:12</a></li>
-								<li class="breadcrumb-item active">24/Fev/2020</li>
+								<li class="breadcrumb-item"><a href="#">Sistema Escolar</a></li>
 							</ol>
 						</div>
 						<!-- /.col -->
@@ -251,12 +250,12 @@
 					<!-- Small boxes (Stat box) -->
 
 
-					<div class="row mb-3">
+					<div class="row mb-2">
 						<div class="col-lg-3 col-6">
 							<!-- small box -->
 							<div class="small-box bg-info">
 								<div class="inner">
-									<h3>150</h3>
+									<h3 th:text="${qalunos}"></h3>
 
 									<p>Alunos</p>
 								</div>
@@ -273,7 +272,7 @@
 							<div class="small-box bg-success">
 								<div class="inner">
 									<h3>
-										53<sup style="font-size: 20px">%</sup>
+										<span th:text="${qfunc}"></span><sup style="font-size: 20px">Funcs</sup>
 									</h3>
 
 									<p>Funcionários</p>
@@ -290,7 +289,7 @@
 							<!-- small box -->
 							<div class="small-box bg-warning">
 								<div class="inner">
-									<h3>44</h3>
+									<h3 th:text="${qCurso}"></h3>
 
 									<p>Cursos</p>
 								</div>
@@ -306,7 +305,7 @@
 							<!-- small box -->
 							<div class="small-box bg-danger">
 								<div class="inner">
-									<h3>65</h3>
+									<h3 th:text="${renda}"></h3>
 
 									<p>Finança</p>
 								</div>
@@ -341,12 +340,12 @@
 
 										<div class="row">
 											<div class="form-group">
-												<label for="escilha"> 930-820-225 &nbsp;</label>
+												<label for="escilha">(+244) 930-762-236 &nbsp;</label>
 											</div>
 										</div>
 										<div class="row">
 											<div class="form-group">
-												<label for="escilha2"> 930-820-225 &nbsp;</label>
+												<label for="escilha2">(+244) 930-820-225 &nbsp;</label>
 											</div>
 										</div>
 										<div class="row mb-3">
@@ -373,7 +372,7 @@
 							<footer class="footer">
 								<div class="container-fluid">
 									<p class="copyright text-center txt-block">
-										Copyright &copy; <a herf="/index">TechShine</a> 2020.
+										Copyright &copy; <a herf="/index">WebGenius</a> 2020.
 									</p>
 								</div>
 							</footer>

@@ -71,43 +71,6 @@ public class Login {
 			parouEm=5;
 		}
 		
-		/*
-		 * IntegrantesDaEscola cadaIntegrante=new Escola_Integrantes();
-		Escola_Integrantes acessso= new Escola_Integrantes();
-        
-		
-        
-        
-	     escola1.setNomeDaEscola("Vassovava");
-	     escolas.add(escola1);
-	     
-        
-        sair:
-		for(Escola cadaC: escolas) {
-			
-			
-			
-			
-			senha= cadaIntegrante.existeNaEscola(Indentificador, nomeDaEscola);
-			System.out.println("senha De Login: "+senha);
-			
-			controle=acessso.getPodeContinuar();
-			System.out.println("Controle: "+controle);
-			if(controle==2) {
-				//Faz Parte Dos Integrantes Da Escola
-				
-				break sair;
-			}
-		}
-		 senha= cadaIntegrante.existeNaEscola(Indentificador, nomeDaEscola);
-			System.out.println("senha De Login: "+senha);
-			
-			controle=acessso.getPodeContinuar();
-		
-		 * 
-		 */
-		
-	     
 	        
 		//if(controle==2) {
 			
@@ -159,10 +122,7 @@ public class Login {
 				
 				pagina="TechShine/Aluno/inicio";
 			}
-			else  {
-				
-				pagina="WebGnius/WG/inicio";
-			}
+			
 		//}
 		
 			System.out.println("Minha Pagina2: "+pagina);

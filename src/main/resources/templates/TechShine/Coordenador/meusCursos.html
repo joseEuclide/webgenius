@@ -345,7 +345,6 @@
 
 													<th class="th">Cursos</th>
 													<th class="th">Nº De Professores</th>
-													<th class="th">Nº De Alunos</th>
 
 
 
@@ -356,9 +355,8 @@
 											
 												<tr th:each="prof : ${cursos}">
 
-													<td th:text="${prof.nome}"></td>
+													<td th:text="${prof.curso}"></td>
 													<td th:text="${prof.qProfs}"></td>
-													<td th:text="${prof.qAlunos}"></td>
 
 
 

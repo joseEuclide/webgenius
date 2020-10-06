@@ -377,7 +377,8 @@
 									<div class="card-body">
 
 										<div class="container ">
-											<p ><em class="lead whie-text mb-4">Cadastre As Disciplinas De Um Curso</em>
+											<p ><em class="lead whie-text mb-4">Cadastre As Disciplinas De 
+											<span th:text="${curso}" ></span></em>
 											</p>
 											
 										</div>
@@ -385,11 +386,6 @@
 										<form action="/Cadastrar-Sistema-6" method="post" class="container">
 
 											<fieldset class="mb-5" id="curso1">
-											
-											
-											
-											
-											
 											
 											<div class="container mb-2" >
                                               
@@ -461,9 +457,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina1" type="text" id="cg"
+                                                       <input name="desciplinas1" type="text" id="cg"
 																class="input container"   
-																placeholder="1º Disciplina">
+																placeholder="1º Disciplina" required="required" min="1">
 
 													</div>
 												</div>
@@ -501,9 +497,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina2" type="text" id="cg"
+                                                       <input name="desciplinas2" type="text" id="cg"
 																class="input container"   
-																placeholder="2º Disciplina">
+																placeholder="2º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -541,9 +537,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina3" type="text" id="cg"
+                                                       <input name="desciplinas3" type="text" id="cg"
 																class="input container"   
-																placeholder="3º Disciplina">
+																placeholder="3º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -589,9 +585,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina4" type="text" id="cg"
+                                                       <input name="desciplinas4" type="text" id="cg"
 																class="input container"   
-																placeholder="4º Disciplina">
+																placeholder="4º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -629,9 +625,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina5" type="text" id="cg"
+                                                       <input name="desciplinas5" type="text" id="cg"
 																class="input container"  
-																placeholder="5º Disciplina">
+																placeholder="5º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -669,9 +665,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina6" type="text" id="cg"
+                                                       <input name="desciplinas6" type="text" id="cg"
 																class="input container"  
-																placeholder="6º Disciplina">
+																placeholder="6º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -718,9 +714,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina7" type="text" id="cg"
+                                                       <input name="desciplinas7" type="text" id="cg"
 																class="input container" 
-																placeholder="7º Disciplina">
+																placeholder="7º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -758,9 +754,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina8" type="text" id="cg"
+                                                       <input name="desciplinas8" type="text" id="cg"
 																class="input container" 
-																placeholder="8º Disciplina">
+																placeholder="8º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -798,9 +794,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina9" type="text" id="cg"
+                                                       <input name="desciplinas9" type="text" id="cg"
 																class="input container"  
-																placeholder="9º Disciplina">
+																placeholder="9º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -820,7 +816,7 @@
 
 														<p>
 															<label for="cv9">Sim</label> 
-															<input name="desciplina9" type="radio" id="cv9"
+															<input name="chave9" type="radio" id="cv9"
 																class="" >
 															<label for="cv99">Não</label> 
 															<input  type="radio"
@@ -844,9 +840,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina10" type="text" id="cg"
+                                                       <input name="desciplinas10" type="text" id="cg"
 																class="input container"  
-																placeholder="10º Disciplina">
+																placeholder="10º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -884,9 +880,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina11" type="text" id="cg"
+                                                       <input name="desciplinas11" type="text" id="cg"
 																class="input container" 
-																placeholder="11º Disciplina">
+																placeholder="11º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -924,9 +920,9 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina12" type="text" id="cg"
+                                                       <input name="desciplinas12" type="text" id="cg"
 																class="input container"  
-																placeholder="12º Disciplina">
+																placeholder="12º Disciplina" min="1">
 
 													</div>
 												</div>
@@ -973,7 +969,7 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina13" type="text" id="cg"
+                                                       <input name="desciplinas13" type="text" id="cg"
 																class="input container"  
 																placeholder="13º Disciplina">
 
@@ -1013,7 +1009,7 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina14" type="text" id="cg"
+                                                       <input name="desciplinas14" type="text" id="cg"
 																class="input container"
 																placeholder="14º Disciplina">
 
@@ -1035,7 +1031,7 @@
 
 														<p>
 															<label for="cv14">Sim</label> 
-															<input name="desciplina14" type="radio" id="cv14"
+															<input name="chave14" type="radio" id="cv14"
 																class="" >
 															<label for="cv144">Não</label> 
 															<input  type="radio"
@@ -1053,7 +1049,7 @@
 												    <div class="form-group">
 
 													<div class="input-group">
-                                                       <input name="desciplina15" type="text" id="cg"
+                                                       <input name="desciplinas15" type="text" id="cg"
 																class="input container"  
 																placeholder="15º Disciplina">
 

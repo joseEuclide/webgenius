@@ -431,11 +431,10 @@
 
 													
 														<select class="custom-select  container" name="curso"
-																id="duracao">
-																<option disabled selected>Selecione o Curso.</option>
-
-
-																<option th:value="${cur}" th:each="cur : ${cursos}"
+																id="duracao" required="required">
+																
+																<option selected></option>
+                                                                 <option th:value="${cur}" th:each="cur : ${cursos}"
 																	th:text="${cur}"></option>
 
 															</select>
@@ -457,9 +456,8 @@
 
 													
 														<select class="custom-select  container" name="nivel"
-																id="nivel">
-																<option disabled selected>Selecione uma
-																	opção...</option>
+																id="nivel" required="required">
+																<option selected></option>
 
 
 																<option th:value="${nivel}" th:each="nivel : ${niveis}"
@@ -485,6 +483,8 @@
 
 															<select name="turno" class="custom-select"
 																required="required">
+																
+																<option selected></option>
 																<option value="Manha">Manhã</option>
 																<option value="Tarde">Tarde</option>
 																<option value="Noite">Noite</option>
@@ -498,19 +498,28 @@
 												    
 												        <div class="input-group-pretend">
 												        
-												            <label for="valor">Nº Do Bilhete(Opcional)</label>
+												            <label for="valor">Nº De Matrícula</label>
 												        </div>
 												    </div>
-												
-												    <div class="form-group">
 
-													<div class="form-group">
+																<div class="form-group">
 
-															<input name="bi" type="text" id="aluno"
-																class="input container" >
-														</div>
-												</div>
-												</div>
+																	<div class="input-group">
+																		<input name="bi" type="text" id="aluno1"
+																			class="input container" list="alunos1">
+																		<datalist id="alunos1">
+
+
+																			<option th:value="${m}" th:each="m : ${processos}"
+																				th:text="${m}"></option>
+
+
+
+																		</datalist>
+
+																	</div>
+																</div>
+															</div>
 												
 												
 												
@@ -554,7 +563,7 @@
 															<div class="input-group">
                                                        <input name="nome" type="text" id="aluno1"
 																class="input container"  list="alunos1">
-														<datalist id="alunos1">
+														<datalist id="alunos1" >
 														
 														
 														    <option th:value="${m}" th:each="m : ${manha}"

@@ -7,8 +7,32 @@ public class Coordenador {
 	private boolean prova;
 	private boolean exame;
 	private boolean bloqueio;
+	private String curso;
+	private int qProfs;
 	
 	
+	
+	
+	public String getCurso() {
+		return curso;
+	}
+
+
+	public void setCurso(String curso) {
+		this.curso = curso;
+	}
+
+
+	public int getqProfs() {
+		return qProfs;
+	}
+
+
+	public void setqProfs(int qProfs) {
+		this.qProfs = qProfs;
+	}
+
+
 	public boolean isBloqueio() {
 		return bloqueio;
 	}

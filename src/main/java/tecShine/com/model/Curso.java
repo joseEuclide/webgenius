@@ -8,18 +8,45 @@ public class Curso {
 	private String professor;
 	private String lancou;
 	private int cargaHoraria;
-	private int preco;
+	
 	private boolean inserir_Disciplinas;
 	private String coord;
 	private int qProfs;
 	private int qAlunos;
 	private int telefone;
+	private int preco1;
+	
+	private int preco2;
+	private int preco3;
+	private int preco4;
 	
 	
 	
 	
-	
-	
+	public int getPreco1() {
+		return preco1;
+	}
+	public void setPreco1(int preco1) {
+		this.preco1 = preco1;
+	}
+	public int getPreco2() {
+		return preco2;
+	}
+	public void setPreco2(int preco2) {
+		this.preco2 = preco2;
+	}
+	public int getPreco3() {
+		return preco3;
+	}
+	public void setPreco3(int preco3) {
+		this.preco3 = preco3;
+	}
+	public int getPreco4() {
+		return preco4;
+	}
+	public void setPreco4(int preco4) {
+		this.preco4 = preco4;
+	}
 	public int getTelefone() {
 		return telefone;
 	}
@@ -82,10 +109,5 @@ public class Curso {
 	public void setCargaHoraria(int cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
 	}
-	public int getPreco() {
-		return preco;
-	}
-	public void setPreco(int preco) {
-		this.preco = preco;
-	}
+	
 }

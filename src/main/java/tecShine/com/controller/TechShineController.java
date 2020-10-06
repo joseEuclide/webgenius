@@ -56,12 +56,14 @@ import tecShine.com.model.Propina;
 import tecShine.com.model.Propina_E_Multa;
 import tecShine.com.model.Recuperando_Dados;
 import tecShine.com.model.RecuperarSenha;
+import tecShine.com.model.Relatorio;
 import tecShine.com.model.Salario;
 import tecShine.com.model.Turma;
 import tecShine.com.model.Validacoes;
 import tecShine.com.model.Venda;
 import tecShine.com.model.WG.Escola;
 import tecShine.com.model.WG.PCA_WG;
+import tecShine.com.relatorios.ImprimirRelatorio;
 
 @Controller
 
@@ -123,8 +125,12 @@ public class TechShineController {
 	private String curso2;
 	private String turmaAluno;
 	private String disciplina;
+	private String nivel;
 	private ArrayList<String> conteudos2;
 	private ArrayList<String> conteudos3 = new ArrayList<>();
+	private String nomeCompleto;
+	private String turnoAluno;
+	private String retorno;
 
 	@GetMapping({ "/login", "/" })
 	public String login() {
@@ -224,7 +230,8 @@ public class TechShineController {
 			this.senha = senha2;
 
 			System.out.println("Senha Geral: " + senha);
-			if (usuario.equalsIgnoreCase("PCA")) {
+			if (usuario.equalsIgnoreCase("PCA")||
+					(usuario.endsWith("PCA"))) {
 
 				estado = 1;
 
@@ -235,8 +242,13 @@ public class TechShineController {
 
 					configurarNome = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, "pca_" + this.BD, "nome", "bi",
 							this.bi, 0);
-
-					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+                    this.nomeCompleto = configurarNome;
+					
+					if(configurarNome.contains(" ")) {
+						
+						configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+					}
+					
 
 					configurarEscola = p.pesquisarTudoEmString(this.BD, "pca_" + this.BD, "instituicao").get(0);
 
@@ -262,6 +274,9 @@ public class TechShineController {
 
 				} else {
 
+					
+					this.quem_E_O_func="pca";
+					System.out.println("this.quem_E_O_func: "+this.quem_E_O_func);
 					pagina = entrarNoSistema.quemEstaAFazerLogin(senha, usuario);
 					this.pagina = pagina;
 
@@ -276,8 +291,13 @@ public class TechShineController {
 
 				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, this.turmaAluno, "Alunos", "id", "",
 						this.id);
+				
+				this.nomeCompleto = configurarNome;
 
-				configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				if(configurarNome.contains(" ")) {
+					
+					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				}
 
 				configurarEscola = p.pesquisarTudoEmString(this.BD, "pca_" + this.BD, "instituicao").get(0);
 
@@ -296,7 +316,12 @@ public class TechShineController {
 
 				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, "Coord_DadosPessoais", "nomes", "bi",
 						this.bi, 0);
-				configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				
+				this.nomeCompleto = configurarNome;
+				if(configurarNome.contains(" ")) {
+					
+					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				}
 
 				configurarEscola = p.pesquisarTudoEmString(this.BD, "pca_" + this.BD, "instituicao").get(0);
 
@@ -313,7 +338,12 @@ public class TechShineController {
 
 				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, "Secretaria_DadosPessoais", "nomes",
 						"bi", this.bi, 0);
-				configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				
+				this.nomeCompleto = configurarNome;
+				if(configurarNome.contains(" ")) {
+					
+					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				}
 
 				configurarEscola = p.pesquisarTudoEmString(this.BD, "pca_" + this.BD, "instituicao").get(0);
 
@@ -331,8 +361,13 @@ public class TechShineController {
 
 				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, "Tesouraria_DadosPessoais", "nomes",
 						"bi", this.bi, 0);
+				
+				this.nomeCompleto = configurarNome;
 
-				configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				if(configurarNome.contains(" ")) {
+					
+					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				}
 
 				configurarEscola = p.pesquisarTudoEmString(this.BD, "pca_" + this.BD, "instituicao").get(0);
 
@@ -349,8 +384,14 @@ public class TechShineController {
 
 				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, "Professor_DadosPessoais", "nomes",
 						"bi", this.bi, 0);
+				
+				
+				this.nomeCompleto = configurarNome;
 
-				configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				if(configurarNome.contains(" ")) {
+					
+					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				}
 
 				configurarEscola = p.pesquisarTudoEmString(this.BD, "pca_" + this.BD, "instituicao").get(0);
 
@@ -367,8 +408,13 @@ public class TechShineController {
 
 				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, "DP_DadosPessoais", "nomes", "bi",
 						this.bi, 0);
+				
+				this.nomeCompleto = configurarNome;
 
-				configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				if(configurarNome.contains(" ")) {
+					
+					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				}
 
 				configurarEscola = p.pesquisarTudoEmString(this.BD, "pca_" + this.BD, "instituicao").get(0);
 
@@ -387,8 +433,13 @@ public class TechShineController {
 
 				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, "DA_DadosPessoais", "nomes", "bi",
 						this.bi, 0);
+				
+				this.nomeCompleto = configurarNome;
 
-				configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				if(configurarNome.contains(" ")) {
+					
+					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				}
 
 				configurarEscola = p.pesquisarTudoEmString(this.BD, "pca_" + this.BD, "instituicao").get(0);
 
@@ -407,8 +458,13 @@ public class TechShineController {
 
 				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, "DG_DadosPessoais", "nomes", "bi",
 						this.bi, 0);
+				
+				this.nomeCompleto = configurarNome;
 
-				configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				if(configurarNome.contains(" ")) {
+					
+					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				}
 
 				configurarEscola = p.pesquisarTudoEmString(this.BD, "pca_" + this.BD, "instituicao").get(0);
 
@@ -429,6 +485,10 @@ public class TechShineController {
 
 				configurarNome = p.pesquisarUmConteudo_Numa_Linha_String("wg", "pca", "usuario", "bi", this.bi, 0);
 
+				if(configurarNome.contains(" ")) {
+					
+					configurarNome = v.usuarioAcesso(v.acessoAWG(configurarNome));
+				}
 				model.addAttribute("pca", configurarNome);
 				model.addAttribute("escola", "WebGenius");
 
@@ -447,14 +507,23 @@ public class TechShineController {
 
 			}
 
-		}  else {
+		}  else {	
+			
 
 			pagina = "TechShine/login";
 			this.pagina = pagina;
 			senha = " ";
 			request = null;
+			
+			if(p.mensagem2!=null) {
+				
+				this.mensagem = p.mensagem2;
+			}else {
+				
+				this.mensagem = "* Coloque Seus Dados De Acesso Correctamente! ";
+			}
 
-			this.mensagem = "* Coloque Seus Dados De Acesso Correctamente! ";
+			
 			model.addAttribute("mensagem", this.mensagem);
 			System.out.println("Entrou Em Nenhum Lado");
 		}
@@ -528,6 +597,8 @@ public class TechShineController {
 		}
 		ArrayList<String> niveis = p.pesquisarTudoEmString(this.BD, "infoescola", "niveis");
 		if (requisicao.equalsIgnoreCase("/Cadastrar-Sistema-1")) {
+			
+			
 
 			if (estado < 0) {
 
@@ -541,6 +612,8 @@ public class TechShineController {
 
 				}
 				if (entrarNoSistema.podeAbrirAPagina(senha)) {
+					
+					this.quem_E_O_func="pca";
 
 					// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
@@ -623,6 +696,7 @@ public class TechShineController {
 						model.addAttribute("nome", configurarNome);
 						model.addAttribute("escola", configurarEscola);
 
+						this.quem_E_O_func="pca";
 						nomeDaPagina = "WebGnius/cadastrar_Empresa/sistema_fase3";
 						this.pagina = nomeDaPagina;
 						++estado;
@@ -961,6 +1035,42 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				
+				int qalunos = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qalunos", "id", "", 1);
+				int qfunc = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qfunc", "id", "", 1);
+				int QCurso = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "QCurso", "id", "", 1);
+
+				
+				int renda;
+				String mes = s.mesActual(this.BD);
+
+				if (this.quem_E_O_func.equalsIgnoreCase("pca")) {
+					renda = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "adminfinanca", "renda", "bi_admin", this.bi, 0);
+
+					model.addAttribute("renda", renda + ",00 Kz");
+				} else {
+
+					renda = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, this.quem_E_O_func + "_financa", mes, "id", "",
+							this.id);
+
+					if (renda == 0) {
+						model.addAttribute("renda", "Irregular");
+					} else {
+						model.addAttribute("renda", "Regular");
+					}
+
+				}
+
+				model.addAttribute("qalunos", qalunos);
+				model.addAttribute("qfunc", qfunc);
+				model.addAttribute("qCurso", QCurso);
+
+				
+				model.addAttribute("nome", configurarNome);
+				model.addAttribute("escola", configurarEscola);
+			
+				  
+				
 				nomeDaPagina = "WebGnius/WG/contactos";
 				this.pagina = nomeDaPagina;
 				// }
@@ -1124,7 +1234,14 @@ public class TechShineController {
 				model.addAttribute("qCurso", QCurso);
 				model.addAttribute("renda", renda);
 
-				model.addAttribute("cursos", tCursos);
+				ArrayList<String> tCursos2= new ArrayList<>();
+
+				for(int i=0;i<tCursos.size();i++) {
+
+					tCursos2.add(tCursos.get(i));
+				}
+
+				model.addAttribute("cursos", tCursos2);
 				model.addAttribute("resultado", "Curso Inserido Com Sucesso !");
 				model.addAttribute("nome", configurarNome);
 				model.addAttribute("escola", configurarEscola);
@@ -1161,8 +1278,15 @@ public class TechShineController {
 				model.addAttribute("qfunc", qfunc);
 				model.addAttribute("qCurso", QCurso);
 				model.addAttribute("renda", renda);
+				
+				ArrayList<String> tCursos2= new ArrayList<>();
+				
+				for(int i=0;i<tCursos.size();i++) {
+					
+					tCursos2.add(tCursos.get(i));
+				}
 
-				model.addAttribute("cursos", tCursos);
+				model.addAttribute("cursos", tCursos2);
 				model.addAttribute("resultado", "Curso Inserido Com Sucesso !");
 				model.addAttribute("nome", configurarNome);
 				model.addAttribute("escola", configurarEscola);
@@ -2223,6 +2347,21 @@ public class TechShineController {
 		desciplinas.add(desciplina.getDesciplinas13());
 		desciplinas.add(desciplina.getDesciplinas14());
 		desciplinas.add(desciplina.getDesciplinas15());
+		
+		System.out.println("Todas Disciplinas");
+
+         for(String c : desciplinas) {
+        	 
+        	 System.out.println(" Disciplina: "+c );
+         }
+         
+         System.out.println("Todas Chaves");
+
+         for(Boolean c : chaves) {
+        	 
+        	 System.out.println(" Chaves: "+c );
+         }
+
 
 		// nomeDaPagina= entrarNoSistema.quemEstaAFazerLogin(senha, model);
 
@@ -2533,7 +2672,7 @@ public class TechShineController {
 			s.inserir_Preco_Da_Confirmacao_curso(this.BD, cursos.get(i), this.mc.getConfirmacoes().get(i));
 
 			s.inserir_Preco_Da_matricula_curso(this.BD, cursos.get(i), this.mc.getMatriculas().get(i));
-			s.inserir_Preco_Do_Curso_Propina(this.BD, cursos.get(i), this.pM.getPropinas().get(i));
+
 
 		}
 
@@ -2722,7 +2861,6 @@ public class TechShineController {
 		return this.pagina;
 
 	}
-
 	@GetMapping("/Admin-Todos-Cursos")
 	public String lista_De_Cursos(Model model) {
 
@@ -2737,7 +2875,11 @@ public class TechShineController {
 			ArrayList<String> cursos = p.pesquisarTudoEmString(this.BD, "cursos", "nome");
 			ArrayList<Integer> precos = p.pesquisarTudoEmInt(this.BD, "cursos", "preco");
 			ArrayList<String> coords = p.pesquisarTudoEmString(this.BD, "cursos", "coord");
-
+			ArrayList<Integer> descima = p.pesquisarTudoEmInt(this.BD, "cursos_Niveis", "Decima");
+			ArrayList<Integer> DecimaPrimeira = p.pesquisarTudoEmInt(this.BD, "cursos_Niveis", "DecimaPrimeira");
+			ArrayList<Integer> DecimaSegunda = p.pesquisarTudoEmInt(this.BD, "cursos_Niveis", "DecimaSegunda");
+			ArrayList<Integer> DecimaTerceira = p.pesquisarTudoEmInt(this.BD, "cursos_Niveis", "DecimaTerceira");
+			
 			ArrayList<Curso> funcs = new ArrayList<>();
 			for (int i = 0; i < cursos.size(); i++) {
 
@@ -2753,8 +2895,17 @@ public class TechShineController {
 					curso.setCoord("Nenhum");
 				}
 
-				if (precos.size() > 0) {
-					curso.setPreco(precos.get(i));
+				if (descima.size() > 0) {
+					curso.setPreco1(descima.get(i));
+				}
+				if (DecimaPrimeira.size() > 0) {
+					curso.setPreco2(DecimaPrimeira.get(i));
+				}
+				if (DecimaSegunda.size() > 0) {
+					curso.setPreco3(DecimaSegunda.get(i));
+				}
+				if (DecimaTerceira.size() > 0) {
+					curso.setPreco4(DecimaTerceira.get(i));
 				}
 
 				funcs.add(curso);
@@ -2791,7 +2942,7 @@ public class TechShineController {
 					model.addAttribute("renda", "Regular");
 				}
 
-			}
+			} 
 
 			model.addAttribute("qalunos", qalunos);
 			model.addAttribute("qfunc", qfunc);
@@ -2921,6 +3072,12 @@ public class TechShineController {
 	@PostMapping("/Admin-Alunos")
 	public String matricularAluno(Aluno aluno, Model model) {
 
+		
+		String nomeDoAluno = aluno.getNome();
+		
+		System.out.println("nomeDoAluno: "+nomeDoAluno);
+		this.aluno.setNome(nomeDoAluno);
+		
 		Salvar_SQL s = new Salvar_SQL();
 		Turma dadosAluno = s.inserirAluno(this.BD, aluno);
 
@@ -2937,14 +3094,14 @@ public class TechShineController {
 		String curso = aluno.getCurso();
 		String nivel = aluno.getNivel();
 		String turno = aluno.getTurno();
-		String nomeDoAluno = aluno.getNome();
+		
 
 		aluno.setCurso(curso);
 		aluno.setNivel(nivel);
 		aluno.setTurno(turno);
 		aluno.setNome(nomeDoAluno);
 
-		this.aluno.setNome(nomeDoAluno);
+		
 		this.aluno.setCurso(curso);
 		this.aluno.setNivel(nivel);
 		this.aluno.setTurno(turno);
@@ -2956,7 +3113,7 @@ public class TechShineController {
 			model.addAttribute("escola", configurarEscola);
 			model.addAttribute("aluno", dadosAluno);
 
-			this.pagina = "TechShine/Admin/informacaoDoAluno";
+			this.pagina = "redirect:Admin-Info";
 		} else {
 
 			model.addAttribute("resultado", "Aluno Inserido Com Sucesso !");
@@ -2968,7 +3125,7 @@ public class TechShineController {
 
 			model.addAttribute("aluno", alunoDaTurma);
 
-			this.pagina = "TechShine/Admin/cadastrarAluno";
+			this.pagina = "redirect:Admin-Alunos";
 		}
 		return this.pagina;
 	}
@@ -3066,7 +3223,9 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				this.retorno ="Admin-Ver-Func-Cord";
 				ArrayList<String> profs = p.pesquisarTudoEmString(this.BD, "coord_dadospessoais", "nomes");
+				ArrayList<String> bis = p.pesquisarTudoEmString(this.BD, "coord_dadospessoais", "bi");
 				ArrayList<Integer> telefones = p.pesquisarTudoEmInt(this.BD, "coord_dadospessoais", "telefone");
 				ArrayList<Integer> ids = p.pesquisarTudoEmInt(this.BD, "coord_dadospessoais", "id");
 				ArrayList<String> contratos = p.pesquisarTudoEmString(this.BD, "coord_acesso", "contrato");
@@ -3084,6 +3243,7 @@ public class TechShineController {
 					func.setNome(profs.get(i));
 					func.setTelefone(telefones.get(i));
 					func.setId(ids.get(i));
+					func.setBi(bis.get(i));
 
 					if ((contratos.size() > 0) && (i < contratos.size() - 1)) {
 
@@ -3122,11 +3282,14 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				this.retorno ="Admin-Ver-Func-Prof";
+				
 				ArrayList<String> profs = p.pesquisarTudoEmString(this.BD, "professor_dadospessoais", "nomes");
 				ArrayList<Integer> telefones = p.pesquisarTudoEmInt(this.BD, "professor_dadospessoais", "telefone");
 				ArrayList<Integer> ids = p.pesquisarTudoEmInt(this.BD, "professor_dadospessoais", "id");
 				ArrayList<String> contratos = p.pesquisarTudoEmString(this.BD, "professor_acesso", "contrato");
 
+				ArrayList<String> bis = p.pesquisarTudoEmString(this.BD, "secretaria_dadospessoais", "bi");
 				ArrayList<Funcionario> funcs = new ArrayList<>();
 				for (int i = 0; i < profs.size(); i++) {
 
@@ -3134,6 +3297,8 @@ public class TechShineController {
 					func.setNome(profs.get(i));
 					func.setTelefone(telefones.get(i));
 					func.setId(ids.get(i));
+					func.setBi(bis.get(i));
+					
 
 					if ((contratos.size() > 0) && (i < contratos.size() - 1)) {
 
@@ -3210,11 +3375,15 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				
+				this.retorno ="Admin-Ver-Func-Sec";
+				
 				ArrayList<String> profs = p.pesquisarTudoEmString(this.BD, "secretaria_dadospessoais", "nomes");
 				ArrayList<Integer> telefones = p.pesquisarTudoEmInt(this.BD, "secretaria_dadospessoais", "telefone");
 				ArrayList<Integer> ids = p.pesquisarTudoEmInt(this.BD, "secretaria_dadospessoais", "id");
 				ArrayList<String> contratos = p.pesquisarTudoEmString(this.BD, "secretaria_acesso", "contrato");
 
+				ArrayList<String> bis = p.pesquisarTudoEmString(this.BD, "secretaria_dadospessoais", "bi");
 				int qalunos = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qalunos", "id", "", 1);
 				int qfunc = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qfunc", "id", "", 1);
 				int QCurso = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "QCurso", "id", "", 1);
@@ -3261,6 +3430,7 @@ public class TechShineController {
 					func.setNome(profs.get(i));
 					func.setTelefone(telefones.get(i));
 					func.setId(ids.get(i));
+					func.setBi(bis.get(i));
 
 					if ((contratos.size() > 0) && (i < contratos.size() - 1)) {
 
@@ -3298,11 +3468,14 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				this.retorno ="Admin-Ver-Func-DP";
+				
 				ArrayList<String> profs = p.pesquisarTudoEmString(this.BD, "dp_dadospessoais", "nomes");
 				ArrayList<Integer> telefones = p.pesquisarTudoEmInt(this.BD, "dp_dadospessoais", "telefone");
 				ArrayList<Integer> ids = p.pesquisarTudoEmInt(this.BD, "dp_dadospessoais", "id");
 				ArrayList<String> contratos = p.pesquisarTudoEmString(this.BD, "dp_acesso", "contrato");
 
+				ArrayList<String> bis = p.pesquisarTudoEmString(this.BD, "secretaria_dadospessoais", "bi");
 				int qalunos = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qalunos", "id", "", 1);
 				int qfunc = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qfunc", "id", "", 1);
 				int QCurso = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "QCurso", "id", "", 1);
@@ -3349,6 +3522,7 @@ public class TechShineController {
 					func.setNome(profs.get(i));
 					func.setTelefone(telefones.get(i));
 					func.setId(ids.get(i));
+					func.setBi(bis.get(i));
 
 					if ((contratos.size() > 0) && (i < contratos.size() - 1)) {
 
@@ -3385,11 +3559,15 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				this.retorno ="Admin-Ver-Func-DG";
+				
+				
 				ArrayList<String> profs = p.pesquisarTudoEmString(this.BD, "dg_dadospessoais", "nomes");
 				ArrayList<Integer> telefones = p.pesquisarTudoEmInt(this.BD, "dg_dadospessoais", "telefone");
 				ArrayList<Integer> ids = p.pesquisarTudoEmInt(this.BD, "dg_dadospessoais", "id");
 				ArrayList<String> contratos = p.pesquisarTudoEmString(this.BD, "dg_acesso", "contrato");
-
+ 
+				ArrayList<String> bis = p.pesquisarTudoEmString(this.BD, "dg_dadospessoais", "bi");
 				int qalunos = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qalunos", "id", "", 1);
 				int qfunc = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qfunc", "id", "", 1);
 				int QCurso = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "QCurso", "id", "", 1);
@@ -3436,6 +3614,7 @@ public class TechShineController {
 					func.setNome(profs.get(i));
 					func.setTelefone(telefones.get(i));
 					func.setId(ids.get(i));
+					func.setBi(bis.get(i));
 
 					if ((contratos.size() > 0) && (i < contratos.size() - 1)) {
 
@@ -3472,11 +3651,14 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				this.retorno ="Admin-Ver-Func-DA";
+				
 				ArrayList<String> profs = p.pesquisarTudoEmString(this.BD, "da_dadospessoais", "nomes");
 				ArrayList<Integer> telefones = p.pesquisarTudoEmInt(this.BD, "da_dadospessoais", "telefone");
 				ArrayList<Integer> ids = p.pesquisarTudoEmInt(this.BD, "da_dadospessoais", "id");
 				ArrayList<String> contratos = p.pesquisarTudoEmString(this.BD, "da_acesso", "contrato");
 
+				ArrayList<String> bis = p.pesquisarTudoEmString(this.BD, "secretaria_dadospessoais", "bi");
 				int qalunos = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qalunos", "id", "", 1);
 				int qfunc = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qfunc", "id", "", 1);
 				int QCurso = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "QCurso", "id", "", 1);
@@ -3523,6 +3705,7 @@ public class TechShineController {
 					func.setNome(profs.get(i));
 					func.setTelefone(telefones.get(i));
 					func.setId(ids.get(i));
+					func.setBi(bis.get(i));
 
 					if ((contratos.size() > 0) && (i < contratos.size() - 1)) {
 
@@ -3561,10 +3744,15 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				
+				this.retorno ="Admin-Ver-Func-Limp";
+				
+				
 				ArrayList<String> profs = p.pesquisarTudoEmString(this.BD, "limpeza_dadospessoais", "nomes");
 				ArrayList<Integer> telefones = p.pesquisarTudoEmInt(this.BD, "limpeza_dadospessoais", "telefone");
 				ArrayList<Integer> ids = p.pesquisarTudoEmInt(this.BD, "limpeza_dadospessoais", "id");
 
+				ArrayList<String> bis = p.pesquisarTudoEmString(this.BD, "secretaria_dadospessoais", "bi");
 				int qalunos = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qalunos", "id", "", 1);
 				int qfunc = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qfunc", "id", "", 1);
 				int QCurso = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "QCurso", "id", "", 1);
@@ -3611,6 +3799,7 @@ public class TechShineController {
 					func.setNome(profs.get(i));
 					func.setTelefone(telefones.get(i));
 					func.setId(ids.get(i));
+					func.setBi(bis.get(i));
 
 					funcs.add(func);
 
@@ -3637,10 +3826,15 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				
+				this.retorno ="Admin-Ver-Func-Segur";
+				
+				
 				ArrayList<String> profs = p.pesquisarTudoEmString(this.BD, "seguranca_dadospessoais", "nomes");
 				ArrayList<Integer> telefones = p.pesquisarTudoEmInt(this.BD, "seguranca_dadospessoais", "telefone");
 				ArrayList<Integer> ids = p.pesquisarTudoEmInt(this.BD, "seguranca_dadospessoais", "id");
 
+				ArrayList<String> bis = p.pesquisarTudoEmString(this.BD, "secretaria_dadospessoais", "bi");
 				int qalunos = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qalunos", "id", "", 1);
 				int qfunc = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qfunc", "id", "", 1);
 				int QCurso = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "QCurso", "id", "", 1);
@@ -3687,6 +3881,7 @@ public class TechShineController {
 					func.setNome(profs.get(i));
 					func.setTelefone(telefones.get(i));
 					func.setId(ids.get(i));
+					func.setBi(bis.get(i));
 
 					funcs.add(func);
 
@@ -3714,10 +3909,15 @@ public class TechShineController {
 
 				// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+				
+				this.retorno ="Admin-Ver-Func-Tesou";
+				
+				
 				ArrayList<String> profs = p.pesquisarTudoEmString(this.BD, "tesouraria_dadospessoais", "nomes");
 				ArrayList<Integer> telefones = p.pesquisarTudoEmInt(this.BD, "tesouraria_dadospessoais", "telefone");
 				ArrayList<Integer> ids = p.pesquisarTudoEmInt(this.BD, "tesouraria_dadospessoais", "id");
 				ArrayList<String> contratos = p.pesquisarTudoEmString(this.BD, "tesouraria_acesso", "contrato");
+				ArrayList<String> bis = p.pesquisarTudoEmString(this.BD, "secretaria_dadospessoais", "bi");
 
 				int qalunos = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qalunos", "id", "", 1);
 				int qfunc = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "infoescola", "qfunc", "id", "", 1);
@@ -3765,6 +3965,7 @@ public class TechShineController {
 					func.setNome(profs.get(i));
 					func.setTelefone(telefones.get(i));
 					func.setId(ids.get(i));
+					func.setBi(bis.get(i));
 
 					if ((contratos.size() > 0) && (i < contratos.size() - 1)) {
 
@@ -4062,6 +4263,13 @@ public class TechShineController {
 
 				}
 
+				
+				Date d = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				
+				model.addAttribute("data", sdf.format(d));
+				
+				
 				model.addAttribute("p", p2);
 				model.addAttribute("mc", mc);
 				model.addAttribute("os", os);
@@ -4240,7 +4448,8 @@ public class TechShineController {
 
 				String desc2;
 
-				if (turma.endsWith(curso)) {
+				if ((turma.endsWith(curso))||
+						(turma.endsWith(curso.toLowerCase()))) {
 
 					for (String desciplina : desciplinas) {
 						System.out.println("Disci: " + desciplina);
@@ -4510,8 +4719,8 @@ public class TechShineController {
 			ArrayList<String> dessciplinasFiltrada2 = new ArrayList<>();
 
 			String desc2;
-
-			if (turma.endsWith(curso)) {
+			
+			if (turma.endsWith(curso)||(turma.endsWith(curso.toLowerCase()))) {
 
 				for (String desciplina : desciplinas) {
 					System.out.println("Disci: " + desciplina);
@@ -4567,7 +4776,26 @@ public class TechShineController {
 
 		this.disciplina = aluno.getDisciplina();
 		// nomeDaPagina= entrarNoSistema.quemEstaAFazerLogin(senha, model);
-		return "redirect:Aluno-Materias-2";
+		Salvar_SQL s = new Salvar_SQL();
+		Pesquisar_SQL p = new Pesquisar_SQL();
+		
+		
+		String mes = s.mesActual(this.BD);
+		
+		int renda = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, this.quem_E_O_func + "_financa", mes, "id", "",
+				this.id);
+		int nDeEstudante = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, this.quem_E_O_func, "NProc", "id", "",
+				this.id);
+
+		if (renda == 0) {
+
+			this.pagina = "TechShine/Aluno/info1";
+		}else {
+			this.pagina = "redirect:Aluno-Materias-2";
+		}
+		
+		
+		return this.pagina;
 	}
 
 	@GetMapping("/Aluno-Materias-2")
@@ -4603,7 +4831,8 @@ public class TechShineController {
 
 			sair: for (String c : siglas) {
 
-				if (this.turmaAluno.contains(c)) {
+				if ((this.turmaAluno.contains(c))||
+						(this.turmaAluno.contains(c.toLowerCase()))) {
 
 					siglaIgual = true;
 					break sair;
@@ -4623,7 +4852,7 @@ public class TechShineController {
 				System.out.println("Descricao: " + c);
 				System.out.println("ficheiro: " + endereco);
 				System.out.println("Desciplina: " + desciplina);
-				if ((endereco.contains(desciplina)) && siglaIgual) {
+				if ((endereco.contains(desciplina)) && (siglaIgual) && (endereco.contains(this.turmaAluno))) {
 
 					System.out.println("Iguais");
 
@@ -4816,9 +5045,56 @@ public class TechShineController {
 
 			String curso = p.pesquisarUmConteudo_Numa_Linha_String(this.BD, this.quem_E_O_func, "curso", "id", "", 1);
 
-			int precoDoCurso = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, "cursos", "preco", "nome", curso, 0);
+			
+			String n=this.quem_E_O_func;
+			String turma=null;
+			
+			if(this.quem_E_O_func.contains("__")) {
+				
+				String[] a = n.split("__");
+				 turma = a[0];
+			}else {
+				turma = this.quem_E_O_func;
+			}
+			
+			
+			String nivel="";
+			
+			
+			if(turma.endsWith("10")) {
+				System.out.println("Turma Da 10º Classe");
+				nivel="10";
+			}else if(turma.endsWith("11")) {
+				System.out.println("Turma Da 11º Classe");
+				nivel="11";
+			}if(turma.endsWith("12")) {
+				System.out.println("Turma Da 12º Classe");
+				nivel="12";
+			}if(turma.endsWith("13")) {
+				System.out.println("Turma Da 13º Classe");
+				nivel="13";
+			}
+			
+            int precoDoCurso=0;		
+			
+			if(nivel.contains("10")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "Decima", "cursos", curso, 0);	
+			}else if(nivel.contains("11")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaPrimeira", "cursos", curso, 0);	
+			}else if(nivel.contains("12")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaSegunda", "cursos", curso, 0);	
+			}else if(nivel.contains("13")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaTerceira", "cursos", curso, 0);	
+			}
+			
+			
+			
+			
+			
 			int diferenca;
 			int mes2 = 0;
+			
+			
 
 			ArrayList<Aluno> dados = new ArrayList<>();
 			for (String cadaC : meses) {
@@ -4828,19 +5104,42 @@ public class TechShineController {
 						this.id);
 
 				if (mes2 > 0) {
+					
+					if(mes2==1) {
+						
+						aluno.setPagamento("Não Pago");
+						aluno.setMulta("Nenhuma");
+					}else {
+						
+						diferenca = mes2 - precoDoCurso;
+						
+						System.out.println("Diferenca: "+diferenca);
+						System.out.println("mes2: "+mes2);
+						System.out.println("precoDoCurso: "+precoDoCurso);
+						
+						if (diferenca == 0) {
+							
+							System.out.println("Diferenca: "+diferenca);
+							System.out.println("mes2: "+mes2);
 
-					diferenca = mes2 - precoDoCurso;
-					if (diferenca == 0) {
+							aluno.setPagamento(mes2 + ",00 Kz");
+							aluno.setMulta("0,00 Kz");
+						} else {
 
-						aluno.setPagamento(mes2 + ",00 Kz");
-					} else {
+							System.out.println("+*+++++++++++++++++++");
+							
+							System.out.println("Diferenca: "+diferenca);
+							System.out.println("mes2: "+mes2);
 
-						aluno.setMulta(diferenca + ",00 Kz");
+							aluno.setPagamento(mes2 + ",00 Kz");
+							aluno.setMulta(diferenca + ",00 Kz");
 
-						mes2 = mes2 - diferenca;
-
-						aluno.setPagamento(mes2 + ",00 Kz");
+							mes2 = mes2 - diferenca;
+						}
+						
 					}
+
+					
 				}
 
 				if (cadaC.equalsIgnoreCase("Marco")) {
@@ -5078,7 +5377,7 @@ public class TechShineController {
 	}
 
 	@GetMapping({ "/Aluno-Minha-Seguranca" })
-	public String aluno() {
+	public String aluno(Model model) {
 
 		String nomeDaPagina = null;
 		estado = -5;
@@ -5087,6 +5386,35 @@ public class TechShineController {
 
 			// if(acesso.bloqueandoRequisicoes(TechShine_Controller.request, request)) {
 
+			
+			Salvar_SQL s = new Salvar_SQL();
+			Pesquisar_SQL p = new Pesquisar_SQL();
+
+			String mes = s.mesActual(this.BD);
+			Date d = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			int renda = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, this.quem_E_O_func + "_financa", mes, "id", "",
+					this.id);
+			int nDeEstudante = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, this.quem_E_O_func, "NProc", "id", "",
+					this.id);
+
+			if (renda == 0) {
+				model.addAttribute("renda", "Irregular");
+				model.addAttribute("situacao1", "Indisponivel");
+			} else {
+				model.addAttribute("renda", "Regular");
+				model.addAttribute("situacao1", "Disponivel");
+			}
+
+			model.addAttribute("numero", nDeEstudante);
+			
+			
+			model.addAttribute("data", sdf.format(d));
+
+			model.addAttribute("nome", configurarNome);
+			model.addAttribute("escola", configurarEscola);
+			
+			
 			nomeDaPagina = "TechShine/Aluno/security";
 			this.pagina = nomeDaPagina;
 			// }
@@ -5118,9 +5446,7 @@ public class TechShineController {
 			int contador = 0;
 			int contador2 = 0;
 			int contador3 = 0;
-			ArrayList<String> cursos2 = p.pesquisarTudoEmString(this.BD, "cursos", "nome");
-
-			ArrayList<Integer> qPros = new ArrayList<>();
+			
 
 			ArrayList<String> cursos3 = p.pesquisarTudoEmString_Restrito(this.BD, "cursos", "nome", "bi", this.bi, 0);
 
@@ -5146,7 +5472,7 @@ public class TechShineController {
 			int renda = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, this.quem_E_O_func + "_financa", mes, "id", "",
 					this.id);
 
-			model.addAttribute("cursos", cursos2);
+			model.addAttribute("cursos", cursos3);
 			model.addAttribute("qCursos", contador2);
 			model.addAttribute("qProfs", contador);
 			model.addAttribute("nAlunos", contador3);
@@ -5510,6 +5836,7 @@ public class TechShineController {
 			model.addAttribute("cursos", cursos);
 			model.addAttribute("niveis", niveis);
 			model.addAttribute("desciplinas", desciplinas);
+			model.addAttribute("turmas", turmas);
 
 			model.addAttribute("nome", configurarNome);
 			model.addAttribute("escola", configurarEscola);
@@ -5540,7 +5867,7 @@ public class TechShineController {
 		System.out.println("Arquivo Nome: " + arquivo.getName());
 		System.out.println("Arquivo Caminho Absoluto: " + arquivo.getOriginalFilename());
 
-		inserirArquivoNoServido(request, response, arquivo, false, descricao, sigla);
+		inserirArquivoNoServido(request, response, arquivo, false, descricao, sigla,prof.getTurma());
 		System.out.println("Arquivo Caminho Absoluto: " + arquivo.getContentType());
 
 		return "redirect:Professor-Material";
@@ -5658,6 +5985,7 @@ public class TechShineController {
 	public String professor_Avaliacao4(Professor prof) {
 
 		this.prof2 = prof;
+		
 
 		return "redirect:Professor-Provas-2";
 	}
@@ -5806,8 +6134,18 @@ public class TechShineController {
 
 				alunos.add(v.usuarioAcesso(v.acessoAWG(cadaC)));
 			}
+			
+			
+			
+			
+			
 
 			model.addAttribute("alunos", alunos);
+			
+			
+			model.addAttribute("curso", this.prof2.getCurso());
+			model.addAttribute("turma", this.prof2.getTurma());
+			model.addAttribute("turma", this.prof2.getTurma());
 			model.addAttribute("nome", configurarNome);
 			model.addAttribute("escola", configurarEscola);
 
@@ -6554,6 +6892,7 @@ public class TechShineController {
 				ArrayList<String> alunosManha = new ArrayList<>();
 				ArrayList<String> alunosTarde = new ArrayList<>();
 				ArrayList<String> alunosNoite = new ArrayList<>();
+				ArrayList<Integer> todos_Processos = new ArrayList<>();
 
 				int contador = 0;
 				for (ArrayList<String> cadaTurno : todasTurmas) {
@@ -6562,6 +6901,14 @@ public class TechShineController {
 					for (String turma : cadaTurno) {
 
 						ArrayList<String> alunos = p.pesquisarTudoEmString(this.BD, turma, "Alunos");
+						ArrayList<Integer> NProc = p.pesquisarTudoEmInt(this.BD, turma, "NProc");
+						
+						for (Integer nproc : NProc) {
+							
+							
+							todos_Processos.add(nproc);
+						}
+						
 
 						if (contador == 1) {
 							System.out.println("Manha: ");
@@ -6589,7 +6936,11 @@ public class TechShineController {
 					}
 
 				}
-
+				
+				
+				
+				
+				model.addAttribute("processos", todos_Processos);
 				model.addAttribute("manha", alunosManha);
 				model.addAttribute("tarde", alunosTarde);
 				model.addAttribute("noite", alunosNoite);
@@ -7086,7 +7437,7 @@ public class TechShineController {
 
 				ArrayList<String> mesePagos = s.tesouraria_AlunosMezesPagos(this.BD, turma, id);
 				ArrayList<String> meseNPagos = s.tesouraria_AlunosMezes_Não_Pagos(this.BD, turma, id);
-				ArrayList<String> precos = s.tesouraria_MsesQueVaiPagar(this.BD, this.cursoAluno);
+				ArrayList<String> precos = s.tesouraria_MsesQueVaiPagar(this.BD, this.cursoAluno,this.nivel);
 				ArrayList<Pagamento> meses = new ArrayList<>();
 
 				for (String c : mesePagos) {
@@ -7130,7 +7481,7 @@ public class TechShineController {
 				int multa = p.pesquisarTudoEmInt(BD, "adminfinanca", "multa").get(0);
 				ArrayList<String> multas = new ArrayList<>();
 				if ((diaActual > tempoSemMulta) && (multa > 0)) {
-					multas = s.tesouraria_Multas(this.BD, this.cursoAluno);
+					multas = s.tesouraria_Multas(this.BD, this.cursoAluno,this.nivel);
 				}
 
 				System.out.println("Aluno: " + aluno);
@@ -7139,7 +7490,7 @@ public class TechShineController {
 				model.addAttribute("precos", precos);
 				model.addAttribute("meses", meses);
 				model.addAttribute("mesActual", mes2);
-				model.addAttribute("diaActual", tempoSemMulta + 1);
+				model.addAttribute("diaActual", tempoSemMulta);
 				model.addAttribute("multas", multas);
 				model.addAttribute("turma", turma);
 
@@ -7172,13 +7523,25 @@ public class TechShineController {
 		
 		Salvar_SQL s = new Salvar_SQL();
 		Validar v = new Validar();
+		Pesquisar_SQL p = new Pesquisar_SQL();
 		
 		this.cursoAluno = aluno.getCurso();
 		aluno.setCurso(this.cursoAluno);
 		
 		String nivel = aluno.getNivel();
+		this.nivel= nivel;
 		String turno = aluno.getTurno();
 		String nome = aluno.getNome();
+		
+		String bi="";
+		
+		if((aluno.getBi().equalsIgnoreCase(""))||
+				(aluno.getBi()==null)) {
+			
+		}else {
+			
+			bi = aluno.getBi();
+		}
 		
 		aluno.setNivel(nivel);
 		aluno.setTurno(turno);
@@ -7186,7 +7549,7 @@ public class TechShineController {
 		
 		
 		
-		Validacoes b = v.tesouraria_Propina_Validar(this.BD, this.cursoAluno, nivel, turno, nome);
+		Validacoes b = v.tesouraria_Propina_Validar(this.BD, this.cursoAluno, nivel, turno, nome,bi);
 		//r.imprimirRelatorio(request,response);
 
 		if(b.isTemErro()) {
@@ -7211,22 +7574,67 @@ public class TechShineController {
 	}
 
 	@PostMapping({ "/Tesouraria-pagar" })
-	public String tesourariaPagar(Aluno aluno, Model model) {
+	public void tesourariaPagar(HttpServletResponse response,Aluno aluno, Model model) {
 
 		Salvar_SQL s = new Salvar_SQL();
+		Pesquisar_SQL p = new Pesquisar_SQL();
+		
+		String mesesp =  aluno.getMesesAPagar();
+		
+		System.out.println(" mesesp: "+mesesp);
+		 aluno.setMesesAPagar(mesesp);
+		
+		String[] a = mesesp.split(" ");
+		
+		System.out.println(" ***************************************************\n\n: ");
+		System.out.println(" MMMM: "+aluno.getMesesAPagar());
+		String mesApagar = a[0];
+		System.out.println(mesApagar);
+		int pagarQMeses= Integer.parseInt(mesApagar);
+		
+		int idAluno = aluno.getId();
+		
 		Pagamento pagamento = s.tesouraria_EfectuarOPagamento(this.BD, this.alunoFinanca.getTurmaDoAluno(),
-				this.alunoFinanca.getId(), aluno.getMesesAPagar(), this.cursoAluno, this.id, this.bi);
+				this.alunoFinanca.getId(), aluno.getMesesAPagar(), this.cursoAluno, idAluno, this.bi,this.nivel);
 
 		if (pagamento.isPagamentoEfectuado()) {
 
 			// 7 Aqui vai Imprimir a Propina
 			// O Objecto Pagamento ja tem todo os dados que se precisa pa
 			// Impressão
+			
+			
+             String turma = pagamento.getTurma();
+             ArrayList<String> mesesPagos = s.tesouraria_AlunosMezesPagos(this.BD, turma, idAluno);
+			
+             System.out.println("Meses Pagos");
+             
+             for(String c: mesesPagos) {
+            	 
+            	 System.out.println("Mes: "+c);
+             }
+			ImprimirRelatorio ir = new ImprimirRelatorio();
+			
+			int precoDoCurso=0;		
+			
+			if(this.nivel.contains("10")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "Decima", "cursos", this.cursoAluno, 0);	
+			}else if(this.nivel.contains("11")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaPrimeira", "cursos", this.cursoAluno, 0);	
+			}else if(this.nivel.contains("12")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaSegunda", "cursos", this.cursoAluno, 0);	
+			}else if(this.nivel.contains("13")) {
+				precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaTerceira", "cursos", this.cursoAluno, 0);	
+			}
+			
+			
+			int valorPago = precoDoCurso;
+			int numeroDeEstudante = p.pesquisarUmConteudo_Numa_Linha_Int(this.BD, turma,"NProc", "id", "", this.alunoFinanca.getId());
+			  ir.relatorioPropina(this.BD,response, this.configurarEscola, pagamento.getCurso(), "Propina", valorPago, this.configurarNome, pagarQMeses, turma, mesesPagos, pagamento.getAluno(), numeroDeEstudante+"");
 
-			imprimir(pagamento, null, "Propina");
 
 		}
-		return "redirect:Tesouraria-Pagar-Propina";
+		//return "redirect:Tesouraria-Pagar-Propina";
 
 	}
 
@@ -7382,6 +7790,11 @@ public class TechShineController {
 				 * 
 				 */
 
+				
+				Date d = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				
+				model.addAttribute("data", sdf.format(d));
 				model.addAttribute("p", p2);
 				model.addAttribute("mc", mc);
 				model.addAttribute("os", os);
@@ -7518,6 +7931,78 @@ public class TechShineController {
 				 * 
 				 */
 
+				ArrayList<Curso> cursos = p.Listar_Cursos(this.BD);
+				ArrayList<String> tCursos = new ArrayList<>();
+
+				for (Curso c : cursos) {
+
+					tCursos.add(c.getNome());
+				}
+				ArrayList<String> niveis = p.pesquisarTudoEmString(this.BD, "infoescola", "niveis");
+
+				
+				
+				
+				
+				Date d = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				
+				ArrayList<String> turmasManha = p.pesquisarTudoEmString(this.BD, "controle_turmas", "Manha");
+				ArrayList<String> turmasTarde = p.pesquisarTudoEmString(this.BD, "controle_turmas", "Tarde");
+				ArrayList<String> turmasNoite = p.pesquisarTudoEmString(this.BD, "controle_turmas", "Noite");
+
+				ArrayList<ArrayList<String>> todasTurmas = new ArrayList<>();
+
+				todasTurmas.add(turmasManha);
+				todasTurmas.add(turmasTarde);
+				todasTurmas.add(turmasNoite);
+
+				ArrayList<String> alunosManha = new ArrayList<>();
+				ArrayList<String> alunosTarde = new ArrayList<>();
+				ArrayList<String> alunosNoite = new ArrayList<>();
+
+				int contador = 0;
+				for (ArrayList<String> cadaTurno : todasTurmas) {
+
+					++contador;
+					for (String turma : cadaTurno) {
+
+						ArrayList<String> alunos = p.pesquisarTudoEmString(this.BD, turma, "Alunos");
+
+						if (contador == 1) {
+							System.out.println("Manha: ");
+							for (String al : alunos) {
+
+								System.out.println("Aluno: " + al);
+								alunosManha.add(al);
+							}
+						} else if (contador == 2) {
+							System.out.println("Tarde: ");
+							for (String al : alunos) {
+
+								System.out.println("Aluno: " + al);
+								alunosTarde.add(al);
+							}
+						} else if (contador == 3) {
+
+							System.out.println("Noite: ");
+							for (String al : alunos) {
+
+								System.out.println("Aluno: " + al);
+								alunosNoite.add(al);
+							}
+						}
+					}
+
+				}
+
+				
+				model.addAttribute("cursos", tCursos);
+				model.addAttribute("niveis", niveis);
+				model.addAttribute("manha", alunosManha);
+				model.addAttribute("tarde", alunosTarde);
+				model.addAttribute("noite", alunosNoite);
+				model.addAttribute("data", sdf.format(d));
 				model.addAttribute("p", p2);
 				model.addAttribute("mc", mc);
 				model.addAttribute("os", os);
@@ -7605,6 +8090,7 @@ public class TechShineController {
 			}
 
 		} else if (requisicao.equalsIgnoreCase("/Secretaria-Matricula")) {
+			
 
 			if (entrarNoSistema.podeAbrirAPagina(senha)) {
 
@@ -7636,6 +8122,7 @@ public class TechShineController {
 				}
 				ArrayList<String> niveis = p.pesquisarTudoEmString(this.BD, "infoescola", "niveis");
 
+				
 				/*
 				 * p.pesquisarUmConteudo_Numa_Linha_String(this.BD, "disciplinas_dos_profs",
 				 * "turma", "bi", this.bi, 0); ArrayList<String> turmas
@@ -7663,6 +8150,12 @@ public class TechShineController {
 				 * 
 				 */
 
+				
+				Date d = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				
+				model.addAttribute("data", sdf.format(d));
+				
 				model.addAttribute("p", p2);
 				model.addAttribute("mc", mc);
 				model.addAttribute("os", os);
@@ -7767,6 +8260,11 @@ public class TechShineController {
 				 * 
 				 */
 
+				
+				Date d = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				
+				model.addAttribute("data", sdf.format(d));
 				model.addAttribute("p", p2);
 				model.addAttribute("mc", mc);
 				model.addAttribute("os", os);
@@ -8019,6 +8517,11 @@ public class TechShineController {
 			 * SimpleDateFormat("dd/MM/yyyy"); String data = sdf.format(d);
 			 * 
 			 */
+			
+			Date d = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			
+			model.addAttribute("data", sdf.format(d));
 
 			model.addAttribute("p", p2);
 			model.addAttribute("mc", mc);
@@ -8069,14 +8572,17 @@ public class TechShineController {
 	}
 
 	@PostMapping("/Secretaria-Matricula")
-	public String secretariaMatricularAluno(Aluno aluno, Model model) {
+	public String secretariaMatricularAluno(HttpServletResponse response,Aluno aluno, Model model) {
 
 		Salvar_SQL s = new Salvar_SQL();
 		Turma dadosAluno = s.inserirAluno(this.BD, aluno);
 
 		String turma2 = dadosAluno.getTurma();
+		String turma3 = turma2;
+		
+		System.out.println("TURMA2:"+turma2);
 		dadosAluno.setTurma(turma2);
-		this.aluno.setTurma(turma2);
+	
 
 		String[] a = turma2.split("_");
 
@@ -8107,6 +8613,26 @@ public class TechShineController {
 			model.addAttribute("escola", configurarEscola);
 			model.addAttribute("aluno", dadosAluno);
 
+			
+			Pesquisar_SQL p = new Pesquisar_SQL();
+			Tabela_Actualizar_SQL ta = new Tabela_Actualizar_SQL();
+			
+			//Actualizando a tabela de trablhos diarios na propina do Tesoureiro
+			int diario= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "Func_Diario", "MatEConf", "bi", this.bi, 0);
+			++diario;
+			ta.actualizarColuna_Qualquer_Linha(BD, "Func_Diario", "MatEConf", diario, "", "bi", this.bi);
+		    
+			Relatorio r = new Relatorio();
+			ImprimirRelatorio ir = new ImprimirRelatorio();
+			
+			String mes = s.mesActual(this.BD);
+			
+			this.cursoAluno= curso;
+			this.turmaAluno = turma3;
+			this.nivel = nivel;
+			this.turnoAluno= turno;
+			
+           
 			this.pagina = "redirect:Secretaria-Info";
 		} else {
 
@@ -8247,14 +8773,15 @@ public class TechShineController {
 			Salvar_SQL s = new Salvar_SQL();
 			Pesquisar_SQL p = new Pesquisar_SQL();
 
-			ArrayList<String> cursos = p.pesquisarTudoEmString(this.BD, "cursos", "nome");
+			ArrayList<Coordenador> cursos = new ArrayList<>();
 
 			int contador = 0;
 			int contador2 = 0;
+			int contador3 = 0;
 			ArrayList<String> cursos2 = p.pesquisarTudoEmString_Restrito(this.BD, "cursos", "nome", "bi", this.bi, 0);
 
 			System.out.println("Entrou Nos Cursos");
-			for (String cadaC : cursos) {
+			for (String cadaC : cursos2) {
 				++contador2;
 				System.out.println("Contador2: " + contador2);
 				ArrayList<String> profs = p.pesquisarTudoEmString_Restrito(this.BD, "disciplinas_dos_profs",
@@ -8262,8 +8789,16 @@ public class TechShineController {
 				for (String pr : profs) {
 
 					++contador;
+					contador3 = contador;
 					System.out.println("Contador: " + contador);
 				}
+				
+				Coordenador c = new Coordenador();
+				
+				c.setCurso(cadaC);
+				c.setqProfs(contador);
+				cursos.add(c);
+				contador=0;
 
 			}
 
@@ -8274,7 +8809,7 @@ public class TechShineController {
 					this.id);
 
 			model.addAttribute("qCursos", contador2);
-			model.addAttribute("qProfs", contador);
+			model.addAttribute("qProfs", contador3);
 			model.addAttribute("data", sdf.format(d));
 
 			if (renda == 0) {
@@ -8564,10 +9099,53 @@ public class TechShineController {
 	}
 
 	@PostMapping("/imprimirMatricula-2")
-	public String impressão(Escola escola, Model model) {
+	public void impressão(HttpServletResponse response, Model model) {
 
+		
+		Pesquisar_SQL p = new Pesquisar_SQL();
+		Salvar_SQL s = new Salvar_SQL();
 		String nomeDaPagina = null;
 		String senha;
+
+		// this.aluno;
+		
+		int precoDoCurso=0;		
+		
+		if(this.nivel.contains("10")) {
+			precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "Decima", "cursos", this.cursoAluno, 0);	
+		}else if(this.nivel.contains("11")) {
+			precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaPrimeira", "cursos", this.cursoAluno, 0);	
+		}else if(this.nivel.contains("12")) {
+			precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaSegunda", "cursos", this.cursoAluno, 0);	
+		}else if(this.nivel.contains("13")) {
+			precoDoCurso= p.pesquisarUmConteudo_Numa_Linha_Int(BD, "cursos_Niveis", "DecimaTerceira", "cursos", this.cursoAluno, 0);	
+		}
+		
+		int valorPago = precoDoCurso;
+		String mes = s.mesActual(this.BD);
+		ImprimirRelatorio ir = new ImprimirRelatorio();
+		ir.relatorioOutrosServicos(BD, response, this.configurarEscola, mes, this.cursoAluno, "matricula", valorPago, this.configurarNome,
+				"matricula",this.turnoAluno,this.nivel,this.turmaAluno,this.nomeCompleto);
+		
+
+		if (this.quem_E_O_func.equalsIgnoreCase("secretaria")) {
+
+			nomeDaPagina = "redirect:Secretaria-Matricula";
+		} else {
+
+			nomeDaPagina = "redirect:Admin-Alunos";
+		}
+
+		this.pagina = nomeDaPagina;
+		//return this.pagina;
+
+	}
+	
+	@PostMapping("/imprimirMatricula")
+	public String impressão2(Model model) {
+
+		String nomeDaPagina = null;
+	
 
 		// this.aluno;
 
@@ -8638,7 +9216,7 @@ public class TechShineController {
 	}
 
 	public void inserirArquivoNoServido(HttpServletRequest request, HttpServletResponse response, MultipartFile arquivo,
-			boolean e_Um_Logotipo, String descricao, String sigla) throws IOException {
+			boolean e_Um_Logotipo, String descricao, String sigla,String turma) throws IOException {
 
 		Tabela_Actualizar_SQL ta = new Tabela_Actualizar_SQL();
 		Pesquisar_SQL p = new Pesquisar_SQL();
@@ -8655,7 +9233,7 @@ public class TechShineController {
 			if (e_Um_Logotipo) {
 				caminho = request.getServletContext().getRealPath("/" + this.BD + " logotipo") + "/";
 			} else {
-				caminho = request.getServletContext().getRealPath("/" + configurarEscola + " " + this.disciplina) + "/";
+				caminho = request.getServletContext().getRealPath("/" + configurarEscola + " "+turma+" "+ this.disciplina) + "/";
 
 			}
 
@@ -8704,6 +9282,22 @@ public class TechShineController {
 
 		}
 
+	}
+	
+	
+	@GetMapping(value = "/Tirar-Acesso-Ao-Sistema/{bi}")
+	public String tirarAcesso(@PathVariable String bi) { 
+
+		System.out.println("====  bi: "+bi);
+
+	 return "redirect:"+this.retorno ;
+	}
+	@GetMapping(value = "/Repor-Acesso-Ao-Sistema/{bi}")
+	public String reporAcesso(@PathVariable String bi) { 
+
+		System.out.println("====  bi: "+bi);
+
+		return "redirect:"+this.retorno ;
 	}
 
 	public ModelAndView erroDeConnexao() {
@@ -8797,5 +9391,8 @@ public class TechShineController {
 	 * 
 	 * 
 	 */
+	
+	
+	
 
 }

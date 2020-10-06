@@ -416,8 +416,9 @@
                                                                             <tr class="corDaLinha">
                                                                             
                                                                                <th class="th">Nomes</th>
-                                                                               <th class="th">Contratos</th>
-                                                                                <th class="th">Telefones</th>
+                                                                               <th class="th">Telefones</th>
+                                                                               <th class="th"></th>
+                                                                               <th class="th"></th>
                                                                                
                                                                                
                                                                             
@@ -428,8 +429,10 @@
                                                                         
                                                                             <tr th:each="prof : ${coords}">
                                                                                <td  th:text="${prof.nome}"></td>
-                                                                               <td  th:text="${prof.telefone}"></td>
-                                                                               <td  th:text="${prof.contrato2}"></td>
+                                                                               <td  > 
+                                                                                 <a th:href="@{'/Tirar-Acesso-Ao-Sistema/'+ ${prof.bi}}">Bloqueiar</a></td>
+                                                                               <td  > 
+                                                                                 <a th:href="@{'/Repor-Acesso-Ao-Sistema/'+ ${prof.bi}}">Desbloqueiar</a></td>
                                                                               
                                                                                
                                                                             

@@ -1,5 +1,6 @@
 package tecShine.com.JDBC;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +35,7 @@ import tecShine.com.model.WG.PCA_WG;
 public class Pesquisar_SQL {
 
 	private  ConnectionFactory cf= new ConnectionFactory();
+	public String mensagem2;
 
 	
 	/**
@@ -1910,6 +1912,77 @@ public String pesquisarUmConteudo_Numa_Linha_String(String BD,String tabela,
 			conteudo=rs.getString(coluna);
           
 		}
+		 
+		System.out.println("Pesquisa Concluida com Sucesso !!!");
+		
+		
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+	finally {
+		try {
+			con.close();
+			stm.close();
+			rs.close();
+			 
+			
+			System.out.println("Coneccões Fechadas !!!");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	return conteudo;
+}
+
+
+
+public Blob pesquisarUm_Logotipo(String BD,String tabela,
+		String coluna){
+	
+	String  sql="select logotipo from "+tabela+";";
+	
+	
+	  System.out.println("Meu SQL: "+sql);
+	Blob conteudo=null;
+	
+	
+	String usarBD="use "+BD;
+	
+	
+	 Connection con=null;
+	 ResultSet rs = null;
+	 PreparedStatement stm=null ;
+	
+	try{
+		con = ConnectionFactory.getConnection();
+		
+		stm = con.prepareStatement(sql);
+		stm.executeUpdate(usarBD);
+		
+		rs =stm. executeQuery();
+		
+		
+		
+	    int contador=0;
+	    sair:
+		while(rs.next()) {
+			
+			
+			++contador;
+			
+			if(contador==1) {
+				
+				conteudo=(Blob)rs.getBlob(coluna);
+				break sair;
+			}
+			
+          
+		}
 		
 		System.out.println("Pesquisa Concluida com Sucesso !!!");
 		
@@ -2572,20 +2645,34 @@ public int pesquisarUmConteudo_Numa_Linha_Int(String BD,String tabela,
 				
 		    	String[]a = alunoNome.split(",,");
 		    	
-		    	System.out.println(a[0]);
-				alunoNome= 	a[0];
+		    	if(a.length>0) {
+		    		
+		    		System.out.println(a[0]);
+					alunoNome= 	a[0];
+		    	}
+		    	
 			}
 			System.out.println("ALUNO_NOME: "+alunoNome);
 			
+			int proc=0;
+			int contador=0;
 			int id=0;
 			sair:
 			for(String c : turmasFiltradas) {
 				
+				++contador;
+				
+				if(contador==1) {
+					
+					 proc = Integer.parseInt(bi);
+				}
 				if(bi.equals("")||
 						(bi==null)) {
+					
+					
 					id = p.pesquisarUmConteudo_Numa_Linha_Int(BD, c, "id", "Alunos", alunoNome, 0);
 				}else {
-					id = p.pesquisarUmConteudo_Numa_Linha_Int(BD, c+"_dadospessoais", "id", "bi", bi, 0);
+					id = p.pesquisarUmConteudo_Numa_Linha_Int(BD, c, "id", "NProc", "", proc);
 				}
 				
 				
@@ -2843,12 +2930,11 @@ public ArrayList<Escola> Listar_Escolas_Na_WG(
 	return escolas;
 }
 
-
 public ArrayList<Curso> Listar_Cursos(
 		String BD){
 	
 	
-	String sql="select id,nome,coord,preco from cursos";
+	String sql="select id,nome,coord from cursos";
 	ArrayList<Curso> cursos= new ArrayList<>();
 	
 	String usarBD="use "+BD;
@@ -2879,7 +2965,6 @@ public ArrayList<Curso> Listar_Cursos(
 			    curso.setId(rs.getInt("id"));
 			    curso.setNome(rs.getString("nome"));
 			    curso.setCoord(rs.getString("coord"));
-			    curso.setPreco(rs.getInt("preco"));
 			    
 				
 			
@@ -2911,8 +2996,6 @@ public ArrayList<Curso> Listar_Cursos(
 	
 	return cursos;
 }
-
- 
  
 public ArrayList<String> usuario_Tem_Acesso(String usuario,String senha){
 	 
@@ -2923,6 +3006,7 @@ public ArrayList<String> usuario_Tem_Acesso(String usuario,String senha){
 	 int id=0;
 	 String bi;
 	 String acesso_Personalizado;
+	 String usuario2;
 	 String conteudo;
 	 
 	 boolean retorno= false;
@@ -2936,7 +3020,7 @@ public ArrayList<String> usuario_Tem_Acesso(String usuario,String senha){
 	 String BD ;
 	 ArrayList<String> retorno2= new ArrayList<>();
 	 
-	 if(usuario.equalsIgnoreCase("PCA")) {
+	 if(usuario.endsWith("PCA")) {
 		 
 		 System.out.println("Entrou no PCA Acesso");
 		 
@@ -2996,13 +3080,18 @@ public ArrayList<String> usuario_Tem_Acesso(String usuario,String senha){
 										
 										 
 										 acesso_Personalizado= p.pesquisarUmConteudo_Numa_Linha_String(escola, "pca_"+escola, "bi", "acesso1", senha, 0);
-											
-										 if(acesso_Personalizado.equals(senha)) {
+										 usuario2 = p.pesquisarUmConteudo_Numa_Linha_String(escola, "pca_"+escola, "usuario", "acesso1", acesso_Personalizado, 0);
+										 String bi2 = p.pesquisarUmConteudo_Numa_Linha_String(escola, "pca_"+escola, "bi", "acesso1", acesso_Personalizado, 0);
+										 System.out.println("ACESSU PERSONALIZADO: "+acesso_Personalizado);
+										 System.out.println("BI: "+bi2);
+										 
+										 if(acesso_Personalizado.equals(senha)&&
+												 (usuario.equalsIgnoreCase(usuario2))) {
 											 
 											 
 											 
 											 retorno2.add(""+0);
-											 retorno2.add(BIs_PCAS.get(i));
+											 retorno2.add(bi2);
 											 retorno2.add(escola);
 											
 											 
@@ -3090,9 +3179,15 @@ public ArrayList<String> usuario_Tem_Acesso(String usuario,String senha){
 							 acesso_Personalizado= p.pesquisarUmConteudo_Numa_Linha_String(escola, turma+"_acesso", "acesso1", "id", "", id);
 							 usuarioBD = p.pesquisarUmConteudo_Numa_Linha_String(escola, turma+"_acesso", "usuario", "id", "", id);
 								 
-							 if((acesso_Personalizado.equals(senha))&&(usuarioBD.equalsIgnoreCase(usuario))) {
+							 if(acesso_Personalizado.endsWith("_NP")) {
+								 
+								 this.mensagem2= "Não tem Permissão Para Aceder o Sistema";
+								 
+							 }else {
+								 
+								 if((acesso_Personalizado.equals(senha))&&(usuarioBD.equalsIgnoreCase(usuario))) {
 							    	 
-								
+										
 									 retorno2.add(""+id);
 									 retorno2.add(bi);
 									 retorno2.add(escola);
@@ -3104,6 +3199,9 @@ public ArrayList<String> usuario_Tem_Acesso(String usuario,String senha){
 									 retorno=true;
 							    	 break sair;
 							     }
+								 
+							 }
+							 
 						  
 					  }
 				  
@@ -3192,6 +3290,8 @@ public ArrayList<String> usuario_Tem_Acesso(String usuario,String senha){
 					 if((usuario.toLowerCase()).contains(func_BD.toLowerCase())) {
 						 
 						 System.out.println("Contém E Entrou !!!");
+						 
+						 System.out.println("Senha: "+senha);
 						 id = p.pesquisarUmConteudo_Numa_Linha_Int(escola, func_BD+"_DadosPessoais", "id", "bi", senha, 0);
 						    
 						 if(id==0) {
@@ -3202,18 +3302,28 @@ public ArrayList<String> usuario_Tem_Acesso(String usuario,String senha){
 						 
 						 acesso_Personalizado= p.pesquisarUmConteudo_Numa_Linha_String(escola, func_BD+"_acesso", "acesso1", "id", "", id);
 					
-					     
-						 if((acesso_Personalizado.equals(senha))&&(usuarioBD.equalsIgnoreCase(usuario))){
+						 
+						 if(acesso_Personalizado.endsWith("_NP")) {
 							 
-							
-							 System.out.println("BI Igual\nUsuario Ifual");
-							 retorno2.add(""+id);
-							 retorno2.add(bi);
-							 retorno2.add(escola);
-					    	 
-							 retorno=true;
-					    	 break sair;
-					     }
+							 this.mensagem2= "Não tem Permissão Para Aceder o Sistema";
+							 
+						 }else {
+							 
+							 if((acesso_Personalizado.equals(senha))&&(usuarioBD.equalsIgnoreCase(usuario))){
+								 
+									
+								 System.out.println("BI Igual\nUsuario Ifual");
+								 retorno2.add(""+id);
+								 retorno2.add(bi);
+								 retorno2.add(escola);
+						    	 
+								 retorno=true;
+						    	 break sair;
+						     }
+							 
+						 }
+					     
+						
 					 
 					 }
 				}
@@ -3249,6 +3359,8 @@ public ArrayList<String> usuario_Tem_Acesso(String usuario,String senha){
    
 
  
+   
+   
   
   
 }

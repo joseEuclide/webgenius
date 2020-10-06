@@ -11,11 +11,12 @@ public class Validar {
 	
 	public Validacoes tesouraria_Propina_Validar(String BD,
 			String curso,String nivel, String turno,
-			String nome){
+			String nome,String bi){
 		
 		
 		Pesquisar_SQL p = new Pesquisar_SQL();
 		Controle_ID_SQL cID = new Controle_ID_SQL();
+		boolean temBi=false;
 		
 		
 		ArrayList<String> niveis = p.pesquisarTudoEmString(BD, "infoescola", "niveis");
@@ -36,45 +37,77 @@ public class Validar {
 			
 	    	String[]a = nome.split(",,");
 	    	
-	    	System.out.println(a[0]);
-			nome= 	a[0];
+	    	if(a.length>0) {
+	    		
+	    		System.out.println(a[0]);
+				nome= 	a[0];
+	    	}
+	    	
 		}
 		System.out.println("NOME: "+nome);
 		ArrayList<String> todosAlunos = new ArrayList<>();
 		
 		int nAlunos;
 		String aluno;
-		
+		int nAlunos2=0;
+		  
+		sair:
 		for (String turma : turmasManha) {
 			
 			nAlunos = cID.recuperarCodigo(BD, turma, "id");
 			for(int i=1;i<=nAlunos;i++) {
 				
-				aluno = p.pesquisarUmConteudo_Numa_Linha_String(BD, turma, "Alunos", "id", "", i);
+			 	aluno = p.pesquisarUmConteudo_Numa_Linha_String(BD, turma, "Alunos", "id", "", i);
+				nAlunos2 = p.pesquisarUmConteudo_Numa_Linha_Int(BD, turma, "NProc", "id", "", i);
+				
+				if((nAlunos2+"").equalsIgnoreCase(bi)) {
+					
+					temBi = true;
+					break sair;
+				}
 				todosAlunos.add(aluno);
 			}
 		}
 		
+		 
 		
-		
-		
+		sair:
 		for (String turma : turmasTarde) {
 
 			nAlunos = cID.recuperarCodigo(BD, turma, "id");
 			for(int i=1;i<=nAlunos;i++) {
 
 				aluno = p.pesquisarUmConteudo_Numa_Linha_String(BD, turma, "Alunos", "id", "", i);
+				nAlunos2 = p.pesquisarUmConteudo_Numa_Linha_Int(BD, turma, "NProc", "id", "", i);
+				
+				
+				if((nAlunos2+"").equalsIgnoreCase(bi)) {
+
+					temBi = true;
+					break sair;
+				}
 				todosAlunos.add(aluno);
 			}
 		}
 		
 		
+		sair:
 		for (String turma : turmasNoite) {
 
 			nAlunos = cID.recuperarCodigo(BD, turma, "id");
 			for(int i=1;i<=nAlunos;i++) {
 
 				aluno = p.pesquisarUmConteudo_Numa_Linha_String(BD, turma, "Alunos", "id", "", i);
+				
+				
+				nAlunos2 = p.pesquisarUmConteudo_Numa_Linha_Int(BD, turma, "NProc", "id", "", i);
+
+
+				if((nAlunos2+"").equalsIgnoreCase(bi)) {
+
+					temBi = true;
+					break sair;
+				}
 				todosAlunos.add(aluno);
 			}
 		}
@@ -83,59 +116,114 @@ public class Validar {
 		
 		v.setTemErro(false);
 		
-		sair:
-		for(String a : todosAlunos) {
+		
+		if(temBi) {
 			
-			if(a.equalsIgnoreCase(nome)) {
+			
+			ArrayList<String> cursosE = p.pesquisarTudoEmString(BD, "cursos", "nome");
+			
+			sair:
+			for(String c : cursosE) {
 				
-				System.out.println("Aluno Igual");
-				ArrayList<String> cursosE = p.pesquisarTudoEmString(BD, "cursos", "nome");
 				
-				for(String c : cursosE) {
+				if(c.equalsIgnoreCase(curso)) {
 					
+					System.out.println("Curso Igual");
 					
-					if(c.equalsIgnoreCase(curso)) {
+					for(String n : niveis) {
 						
-						System.out.println("Curso Igual");
-						
-						for(String n : niveis) {
+						if(n.equalsIgnoreCase(nivel)) {
 							
-							if(n.equalsIgnoreCase(nivel)) {
+							System.out.println("Nivel Igual");
+							
+							if((turno.equalsIgnoreCase("Manha"))||
+									(turno.equalsIgnoreCase("Tarde"))||
+									(turno.equalsIgnoreCase("Noite"))) {
 								
-								System.out.println("Nivel Igual");
+								System.out.println("Turno Igual");
+								v.setTemErro(true);
+								break sair;
 								
-								if((turno.equalsIgnoreCase("Manha"))||
-										(turno.equalsIgnoreCase("Tarde"))||
-										(turno.equalsIgnoreCase("Noite"))) {
+							}else {
+								System.out.println("Turno Diferente");
+								v.setDescricao("Falha, Escolha Um Turno Na Lista" );
+							}
+							
+						}else {
+							
+							System.out.println("Nivel Diferente");
+							
+							v.setDescricao("Falha, Escolha Um Nivel Na Lista" );
+						}
+						
+					}
+					
+				}else {
+					System.out.println("Curso Diferente");
+					v.setDescricao("Falha, Escolha Um Curso Na Lista" );
+				}
+			}
+			
+		}else {
+			
+			
+			
+			sair:
+				for(String a : todosAlunos) {
+					
+					if(a.equalsIgnoreCase(nome)) {
+						
+						System.out.println("Aluno Igual");
+						ArrayList<String> cursosE = p.pesquisarTudoEmString(BD, "cursos", "nome");
+						
+						for(String c : cursosE) {
+							
+							
+							if(c.equalsIgnoreCase(curso)) {
+								
+								System.out.println("Curso Igual");
+								
+								for(String n : niveis) {
 									
-									System.out.println("Turno Igual");
-									v.setTemErro(true);
-									break sair;
+									if(n.equalsIgnoreCase(nivel)) {
+										
+										System.out.println("Nivel Igual");
+										
+										if((turno.equalsIgnoreCase("Manha"))||
+												(turno.equalsIgnoreCase("Tarde"))||
+												(turno.equalsIgnoreCase("Noite"))) {
+											
+											System.out.println("Turno Igual");
+											v.setTemErro(true);
+											break sair;
+											
+										}else {
+											System.out.println("Turno Diferente");
+											v.setDescricao("Falha, Escolha Um Turno Na Lista" );
+										}
+										
+									}else {
+										
+										System.out.println("Nivel Diferente");
+										
+										v.setDescricao("Falha, Escolha Um Nivel Na Lista" );
+									}
 									
-								}else {
-									System.out.println("Turno Diferente");
-									v.setDescricao("Falha, Escolha Um Turno Na Lista" );
 								}
 								
 							}else {
-								
-								System.out.println("Nivel Diferente");
-								
-								v.setDescricao("Falha, Escolha Um Nivel Na Lista" );
+								System.out.println("Curso Diferente");
+								v.setDescricao("Falha, Escolha Um Curso Na Lista" );
 							}
-							
 						}
-						
 					}else {
-						System.out.println("Curso Diferente");
-						v.setDescricao("Falha, Escolha Um Curso Na Lista" );
+						
+						v.setDescricao("Falha, O "+nome+" Não Pertence a Escola" );
 					}
 				}
-			}else {
-				
-				v.setDescricao("Falha, O "+nome+" Não Pertence a Escola" );
-			}
 		}
+		
+		
 		
 		
 		

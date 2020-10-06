@@ -720,9 +720,7 @@
                                                 
                                                 <select class="custom-select  container" name="curso" id="duracao" required="required"
 														 >
-															<option disabled selected>Selecione uma opção...</option>
-															
-															
+															<option selected="selected"></option>
 															<option th:value="${cur}" th:each="cur : ${cursos}" th:text="${cur}">
 															
 															</option>
@@ -737,9 +735,7 @@
                                                 
                                                 <select class="custom-select  container" name="nivel" id="nivel" required="required"
 														 >
-															<option disabled selected>Selecione uma opção...</option>
-															
-															
+														    <option selected="selected"></option>
 															<option th:value="${nivel}" th:each="nivel : ${niveis}" th:text="${nivel}">
 															
 															</option>
@@ -754,11 +750,12 @@
                                                <label for="curso">Turno</label>
                                                 
                                                 <select name="turno" id="curso" required="required">
-					                                <optgroup label="Selecione o Nível">
+					                              
+					                                    <option selected="selected"></option>
 					                                    <option value="Manha">Manhã</option>
-					                                    <option value="Tarde" selected> Tarde</option>
-					                                    <option value="Noite" selected>Noite</option>
-					                                </optgroup>
+					                                    <option value="Tarde" > Tarde</option>
+					                                    <option value="Noite">Noite</option>
+					                                
 					                                
 					                            </select>
                                             </div>

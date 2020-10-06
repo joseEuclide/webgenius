@@ -390,7 +390,7 @@
 
 											<fieldset class="mb-5" id="curso1">
 											
-											<div class="container mb-3" >
+											<div class="container mb-2" >
                                               
 												<div class="row">
 												<div class="form-group">
@@ -420,6 +420,39 @@
 													</div>
 												</div>
 											</div>
+											
+											<div class="container mb-3" >
+                                              
+												<div class="row">
+												<div class="form-group">
+												       
+												      
+												        <div class="input-group-pretend">
+												        
+												            <label for="duracao">Cursos</label>
+												        </div>
+												    </div>
+												    </div>
+												<div class="row">
+												    <div class="form-group">
+
+													
+														<select class="custom-select  container" name="curso" id="duracao"
+														 >
+															<option disabled selected>Selecione uma opção...</option>
+															
+															
+															<option th:value="${cur}" th:each="cur : ${cursos}" th:text="${cur}">
+															
+															</option>
+															
+														</select>
+
+													</div>
+												</div>
+											</div>
+											
+											
 											<div class="row " >
 
 												<div class="col-md-4 col-lg-4 ">

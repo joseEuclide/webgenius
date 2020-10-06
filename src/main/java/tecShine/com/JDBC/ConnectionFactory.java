@@ -6,8 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
+
+import tecShine.com.controller.TechShineController;
 
 
 
@@ -38,7 +39,90 @@ public class ConnectionFactory {
 		}
 	}
 	
+	/*
+public static Connection getConnection(){
+		
+		
+		TechShineController tc = new TechShineController();
+		Connection con=null;
+		
+		  		
+		try {
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url="jdbc:mysql://localhost:3306/MySQL?useTimezone=true&serverTimezone=UTC";
+			String user="root";
+			String password="1+mM?!--ATtWG*";
+
+			con =DriverManager.getConnection(url, user, password);
+			
+			
+			System.out.println("Conectado");
+
+
+
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Erro Ao se Conectar");
+			tc.erroDeConnexao();
+			//e.printStackTrace();
+			
+			
+		}
+		
+		return con;
+	}
+*/
+
+
+public static Connection getConnection() throws URISyntaxException, SQLException {
+    URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+
+    String username = dbUri.getUserInfo().split(":")[0];
+    String password = dbUri.getUserInfo().split(":")[1];
+    String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath() + "?sslmode=require";
+
+    return DriverManager.getConnection(dbUrl, username, password);
+}
 	
+	/*
+	 * 
+	 * Conexao Ao POSTGRESSQL
+	 */
+	
+	/*
+public static Connection getConnection(){
+		
+	
+		
+		
+	Connection con=null; 		
+		try {
+
+			Class.forName("org.postgresql.Driver");
+			String url="jdbc:postgresql://localhost:5432/hsegura_tutorial";
+			String user="root";
+			String password="1+mM?!--ATtWG*";
+
+			 con =DriverManager.getConnection(url, user, password);
+			
+			
+			System.out.println("Conectado");
+
+
+
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Erro Ao se Conectar");
+			//e.printStackTrace();
+			
+			
+		}
+		
+		return con;
+	}
+
+   /*
 	@Profile("prod")
 	public static Connection getConnection() throws URISyntaxException, SQLException {
 	    URI dbUri = new URI(System.getenv("DATABASE_URL"));
@@ -49,7 +133,7 @@ public class ConnectionFactory {
 
 	    return DriverManager.getConnection(dbUrl, username, password);
 	}
-	
+	*/
 	/*
 	@Profile("dev")
 	public  Connection getConnection(){
@@ -118,4 +202,5 @@ try {
 
 	
 	 
+
 }
